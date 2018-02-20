@@ -1,0 +1,296 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage{times}
+\usepackage{booktabs}
+\usepackage{natbib}
+\usepackage{amsmath}
+\usepackage{setspace}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\usepackage[normalem]{ulem}
+\usepackage{sectsty}
+\subsectionfont{\normalfont\large\underline}
+
+\title{Measuring Subgroup Preferences in Conjoint Experiments}
+\author{Sara Hobolt, Thomas J. Leeper, and James Tilley}
+
+\begin{document}
+
+\maketitle
+
+{\abstract Conjoint analysis has experienced a recent resurgence. The driving force for this change has been the introduction by \citet{HainmuellerHopkinsYamamoto2014} of a fully randomized conjoint design and an associated analytic approach that emphasizes a single causal quantity of interest: namely, the average marginal component effect (AMCE). The AMCE convey the degree to which a given value of a feature increases or decreases respondents' support for a conjoint profile, averaging across all respondents and all other profile features. While randomization of profile features gives the AMCE a causal interpretation, most published conjoint analyses use AMCEs for descriptive purposes: that is, not map variation in preferences across attributes of a multidimensional object, such as a candidate individual or public policy. And many authors also engage in subgroup analyses, wherein they compare subsets of respondents to one another with respect to AMCEs. This paper argues that such approaches can substantially mislead researchers about the degree of agreement or disagreement between subgroups, demonstrates the problem using several example datasets, and provides several suggestions for improved reporting and interpretation. Most importantly, it highlights that the difference in AMCEs between groups is sensitive to the choice of reference categories of features, while the difference in the marginal means is not sensitive in this way. When groups substantially differ in preferences, the difference in marginal means rather than the difference better conveys the size of such disagreements.}
+
+
+<<r hidden, eval=FALSE, echo=FALSE, results="hide">>=
+# setwd("c:/users/thomas/dropbox/brexit identity/papers/subgroupanalysis")
+# knitr::knit2pdf("manuscript.Rnw")
+@
+
+<<r knitr_options, echo=FALSE, results="hide">>=
+knitr::opts_chunk$set(cache = TRUE, echo=FALSE, results="hold", warning=FALSE)
+options(scipen = 10)
+@
+
+\clearpage
+
+
+Conjoint analysis has experienced a recent resurgence in the social sciences and especially in political science. The driving force has been the introduction by \citet{HainmuellerHopkinsYamamoto2014} of a fully randomized conjoint design and an associated analytic approach that emphasizes a single quantity of interest: namely, the average marginal component effect (AMCE). By capturing the multidimensionality of target objects, such as a candidate individual or public policy, the conjoint design breaks any explicit or implicit confounding between those features, thus giving the AMCE a clear causal interpretation: the degree to which a given value of a feature increases or decreases respondents' support for a packaged conjoint profile, averaging across all respondents and all other profile features.
+
+While randomization of profile features gives the AMCE a causal interpretation, most published conjoint analyses use AMCEs for descriptive purposes: that is, to map variation in preferences across attributes of a multidimensional object. For example, \citet{HainmuellerHopkinsYamamoto2014} describe some of the results of their conjoint analysis of congressional candidate preferences:
+
+\begin{quote}
+We also see a bias against Mormon candidates, whose estimated level of support is 0.06 (SE = 0.03) lower when compared to a baseline candidate with no stated religion. Support for Evangelical Protestants is also 0.04 percentage points lower (SE = 0.02) than the baseline. Mainline Protestants, Catholics, and Jews all receive ratings indistinguishable from those of a baseline candidate. (19)
+\end{quote}
+
+This characterization of the results has a distinctly descriptive flavor. While a given religious characteristic \textit{causes} respondents to evaluate a given candidate more or less favorably, the gist of the analysis is that there are differences in the evaluations of candidates of different religious persuasions. \citeauthor{HainmuellerHopkinsYamamoto2014}'s phrasing highlights another feature of conjoint analysis that is not widely discussed: the baseline (or reference category) in the estimation of AMCEs significantly colors which pairwise comparisons between features are highlighted and the degree to which preferences are stated in positive or negative terms. By choosing a non-religious candidate as a baseline, the AMCEs are all expressed relative to this baseline; the difference (if any) between evaluations of Mormon and Evangelical candidates, for example, is not obvious and while it is likely that Mainline Protestant, Catholic, and Jewish candidates are all preferred over Mormon or Evangelical candidates, the AMCEs for these categories are indistinguishable from zero (rather than the positive values they would take if Mormon or Evangelical were the reference category). Similarly, by selecting a reference category that receives middling support (i.e., more favorability than some other feature levels but less favorability than others), some AMCEs are positive while others are negative. Yet because any feature level could be used as the reference cateory, the size but also \textit{direction} of AMCEs is arbitrary. Were the category with the lowest favorability chosen as the reference, all AMCEs would be positive; were the category with the highest favorability chosen as the reference, all AMCEs would be negative. The results would be \textit{numerically equivalent} --- because ultimately the choice of reference category is completely arbitrary and mathematicaly irrelevant --- but the choice as sizable consequences for the interpretation of conjoint analyses.
+
+This is particularly the case when researchers engage in subgroup analyses of conjoint experiments. For example, \citet{HainmuellerHopkinsYamamoto2014} perform a subgroup analysis on their immigration experiment in which they perform a median split on a measure of ethnocentrism and then compare AMCEs for the two subgroups.\footnote{This is achieved by subsetting the data based upon the measure of ethnocentrism and performing separate regressions for high- and low-ethnocentrism respondents.} The interpretation therefore focuses not just on the arbitrarily signed AMCEs within each subgroup (what Hainmueller et al. term ``conditional AMCEs''; 13) but also on an implied quantity of interest: the difference between conditional AMCEs. This comparison seems intuitively correct but because the conditional AMCEs are causal effects expressed relative to an arbitrary baseline, the differences between AMCEs only convey a difference in preference to the extent that the reference category is equally liked by both groups. When the preferences toward the reference category differ substantially between groups, the difference in AMCEs is a biased estimate of the difference in preferences between the two groups. For example, \citet{HainmuellerHopkinsYamamoto2014} eyeball the pattern of AMCEs among high- and low-ethnocentrism respondents and interpret that ``the patterns of support are generally similar for respondents irrespective of their level of ethnocentrism'' (22). Yet simply because the AMCEs are similar does not necessarily mean that \textit{preferences} are similar.
+
+To bring some intuition to this problem, consider a simple two-condition experiment in which the effect of the treatment, $x \in {0,1}$, is compared across a single two-category covariate, $z \in {0,1}$. Subgroup regression equations might be:
+
+\begin{align*}
+\hat{y} &= \beta_0 + \beta_1 x, \quad \forall z = 0 \\
+\hat{y} &= \beta_2 + \beta_3 x, \quad \forall z = 1
+\end{align*}
+
+\noindent The effect of $x$ when $z=0$ is given by $\beta_1$. The effect of $x$ when $z=1$ is given by $\beta_3$. These are, in essence, the conditional AMCEs in a conjoint analysis. yet the difference in AMCEs ($\beta_3 - \beta_1$) is not equal to the differnce in preferences between the two groups, which is $\bar{y}_{z=1|x=1} - \bar{y}_{z=0|x=1}$, or estimated by $(\beta_2 + \beta_3) - (\beta_0 + \beta_1)$. The difference in AMCEs only equals the difference in preferences when $\beta_2 \equiv \beta_0$. Yet the standard AMCE-centric conjoint analysis does not present or characterize either of these quantities. And given that the reference category is arbitrary, there is never any reason to expect that an arbitrarily selected reference category satisfies that equality assumption, meaining that when one uses a difference in AMCEs to estimate a difference in preferences, the size and direction of the bias is determined by the size of the difference in preferences toward the reference category within each subgroup.
+
+Worse, because conjoint analysis generates a sparse feature matrix (where there is never any guarantee that a particular combination of feature levels is observed in the data), it is also not possible to empirically select an appropriate set of reference categories using data. And while it might seem possible to select a \textit{marginally} appropriate reference category (i.e., one where preferences are similar with respect to a given feaure), preferences toward that reference category may differ across other dimensions in the analysis. Thus, there is no way to use conditional AMCEs or differences-in-AMCEs to convey the underlying similarity or differences in preferences across sample subgroups.
+
+In what follows, we formalize how the arbitrary selection of a reference category can mislead researchers about the pattern of preferences exposed by a conjoint experiment and demonstrates how this problem is especially problematic when researchers engage in the now-common practice of comparing conditional AMCEs across respondent subgroups. The paper then demonstrates the problem using several example datasets and provides suggestions for improved reporting and interpretation based around a purely descriptive quantity of interest: namely, the unadjusted marginal means. Software for the R programming language to easily calculate marginal means (as well as AMCEs) is also discussed.
+
+
+\section{Quantities of Interest}
+
+
+% AMCE
+
+
+% Difference in conditional AMCEs
+
+\citet{RatkovicTingley2017} considered efficient methods for performing subgroup analyses in conjoint designs. Our focus here is on the narrower problem of interpreting subgroup analyses as traditionally performed.
+
+\begin{table}
+\caption{Uses of Subgroup Analysis in Published Work}
+\begin{center}
+\footnotesize
+\begin{tabular}{p{2.5in} p{2in} p{2in}}\toprule
+\textbf{Paper} & \textbf{Topic} & \textbf{Subgroup Comparisons} \\ \midrule
+Hainmueller, Hopkins, and Yamamoto (2014) & Immigration Preferences & Ethnocentrism \\
+Bechtel and Scheve (2013) & Climate agreement preferences & Environmentalism and International Reciprocity Attitudes \\
+Bechtel, Genovese, and Scheve (2017) & Climate agreement preferences & Employment sector emissions \\
+Hansen, Olsen, and Bech (2015) & Policy Preferences & Partisanship \\
+Carlson (2015) & Candidate Choice & Co-ethnicity \\
+Franchino and Zucchini (2015) & Candidate Choice & Political Interest, Left-right self-placement\\
+Carnes and Lupu (2016) & Candidate Choice & Partisanship \\
+Mummolo (2016) & News Selection & Various\\
+Mummolo and Nall (2016) & Mobility preferences & Partisanship \\
+Ballard-Rosa, Martin, and Scheve (2016) & Tax Preferences & Various\\
+Bechtel, Hainmueller, and Margalit (2017) & International bailout preferences & Various\\
+Sen (2017) & Judicial candidate preferences & Partisanship \\
+Campbell, Cowley, Vivyan, and Wagner (2016) & Candiate preferences & Partisanship \\
+Kirkland, Coppock (2017) & Candidate choice & Partisanship \\ \bottomrule
+\end{tabular}
+\end{center}
+\end{table}
+
+% Marginal means
+
+
+
+
+\section{Challenges of Interpretation}
+
+% baseline levels of features
+
+% subgroup analyses
+
+% difference in AMCEs versus difference in marginal means
+
+<<r setup>>=
+library("ggplot2")
+requireNamespace("ggstance")
+library("cregg")
+@
+
+<<r data>>=
+data(hainmueller)
+hainmueller$ethnocentrism_split <- ifelse(is.na(hainmueller$ethnocentrism), NA_real_, ifelse(hainmueller$ethnocentrism > 10, 1, 0))
+hainmueller$ethnocentrism_split <- factor(hainmueller$ethnocentrism_split, levels = c(0,1), labels = c("low", "high"))
+@
+
+The following figure provides a replication of Hainmueller et al.'s (2014) results:
+
+<<r hainmueller_immigration, dependson=c("data"), fig.height=10, fig.width=8>>=
+plot(
+  cj(
+   hainmueller, 
+   ChosenImmigrant ~ Gender + Education + LanguageSkills + CountryOfOrigin + Job + JobExperience + JobPlans + ReasonForApplication + PriorEntry,
+   id = ~ CaseID
+  )
+)
+@
+
+\clearpage
+
+<<r functions>>=
+amces_by_reference <- function(data, variable, formula) {
+    # get levels
+    levs <- levels(data[[variable]])
+
+    # loop over levels
+    out <- list()
+    for (i in seq_along(levs)) {
+        data[[variable]] <- relevel(data[[variable]], levs[i])
+        out[[i]] <- cj(data, formula, id = ~ CaseID)
+        out[[i]][["ref_category"]] <- levs[i]
+    }
+
+    # return value
+    out <- do.call("rbind", out)
+    out[["ref_category"]] <- factor(out[["ref_category"]], levels = levs)
+    class(out) <- c("cj_amce", "data.frame")
+    out
+}
+@
+
+\section{Arbitrary reference category choice}
+
+<<r reference_category, dependson=c("data"), fig.width=8, fig.height=5>>=
+x <- amces_by_reference(hainmueller, "CountryOfOrigin", ChosenImmigrant ~ CountryOfOrigin)
+
+ggplot(x, aes(x = estimate, y = level, group = ref_category, colour = level)) +
+  geom_vline(xintercept = 0, colour = "gray") +
+  geom_point(position = ggstance::position_dodgev(height = 0.75)) +
+  geom_errorbarh(aes(xmin = lower, xmax = upper),  
+                 size = 0.2, height = 0,
+                 position = ggstance::position_dodgev(height = 0.75)) + 
+  scale_colour_discrete(guide = ggplot2::guide_legend(title = "Reference Category")) +
+  scale_x_continuous(limits = c(-.3,.3), oob = scales::rescale_none) +
+  ylab("") +
+  xlab("Estimated AMCE") + 
+  theme_minimal() + 
+      ggplot2::theme(
+        legend.position = "bottom",
+        panel.grid.major = ggplot2::element_blank(),
+        panel.grid.minor = ggplot2::element_blank()
+      )
+@
+
+<<r marginal_means, fig.width=8, fig.height=5>>=
+plot(mm(hainmueller, ChosenImmigrant ~ CountryOfOrigin, id = ~ CaseID), vline = 0.5, xlim = c(0,1))
+@
+
+\clearpage
+
+\section{Subgroup Analysis}
+
+A conventional presentation of subgroup analyses in a conjoint design is as follows. Note how the conditional AMCEs for several levels - Somalia, Sudan, China, Mexico, and France - flip signs. Yet the largest differences in preferences between the two groups are for Germany, France, Poland, and Somalia. Apparently similar patterns of AMCE mask where and in what direction preferences for the two subgroups differ.
+
+<<r subgroup_results_amce, dependson=c("data"), fig.width=8, fig.height=5>>=
+by_split <- lapply(c("low","high"), function(x) {
+    out <- cj(na.omit(hainmueller[hainmueller$ethnocentrism_split == x,]), ChosenImmigrant ~ CountryOfOrigin, id = ~ CaseID, estimate = "amce")
+    out$ethnocentrism_split <- x
+    out
+})
+x <- do.call("rbind", by_split)
+
+ggplot(x, aes(x = estimate, y = level, group = ethnocentrism_split, colour = ethnocentrism_split)) +
+  geom_vline(xintercept = 0, colour = "gray") +
+  geom_point(position = ggstance::position_dodgev(height = 0.75)) +
+  geom_errorbarh(aes(xmin = lower, xmax = upper),  
+                 size = 0.2, height = 0,
+                 position = ggstance::position_dodgev(height = 0.75)) + 
+  scale_colour_discrete(guide = ggplot2::guide_legend(title = "Ethnocentrism")) +
+  scale_x_continuous(limits = c(-.3,.3), oob = scales::rescale_none) +
+  ylab("") +
+  xlab("Estimated AMCE") + 
+  theme_minimal() + 
+      ggplot2::theme(
+        legend.position = "bottom",
+        panel.grid.major = ggplot2::element_blank(),
+        panel.grid.minor = ggplot2::element_blank()
+      )
+@
+
+<<r subgroup_marginal_means, dependson=c("data"), fig.width=8, fig.height=5>>=
+plot(cj(hainmueller, ChosenImmigrant ~ CountryOfOrigin, id = ~ CaseID, estimate = "mm", by = ~ethnocentrism_split), vline = 0.5, group = "ethnocentrism_split")
+@
+
+As we can see, however, while the difference in marginal means conveys the fixed difference in preferences between the two groups, the apparent difference in preferences between groups conveyed by a difference-in-AMCEs is sensitive to the reference category chosen when estimating the effects:
+
+\clearpage
+
+<<r subgroup_results_mm, dependson=c("data"), fig.width=10, fig.height=10>>=
+# difference in marginal means
+by_split_mm <- lapply(levels(hainmueller$ethnocentrism_split), function(x) {
+    out <- cj(na.omit(hainmueller[hainmueller$ethnocentrism_split == x,]), ChosenImmigrant ~ CountryOfOrigin, id = ~ CaseID, estimate = "mm")
+    out$ethnocentrism_split <- x
+    out
+})
+x_mm <- merge(by_split_mm[[1]], by_split_mm[[2]], by = c("level"), suffixes = c(".low", ".high"))
+## difference
+x_mm[["diff"]] <- x_mm[["estimate.high"]] - x_mm[["estimate.low"]]
+## standard error of difference
+x_mm[["diff_se"]] <- sqrt(x_mm[["std.error.high"]]^2 + x_mm[["std.error.low"]]^2)
+x_mm[["ref_category"]] <- "Marginal Mean"
+
+# difference in AMCEs
+by_split_amce <- lapply(levels(hainmueller$ethnocentrism_split), function(x) {
+    out <- amces_by_reference(na.omit(hainmueller[hainmueller$ethnocentrism_split == x,]), "CountryOfOrigin", ChosenImmigrant ~ CountryOfOrigin)
+    out$ethnocentrism_split <- x
+    out
+})
+x_amce <- merge(by_split_amce[[1]], by_split_amce[[2]], by = c("level", "ref_category"), suffixes = c(".low", ".high"))
+## difference
+x_amce[["diff"]] <- x_amce[["estimate.high"]] - x_amce[["estimate.low"]]
+## standard error of difference
+x_amce[["diff_se"]] <- sqrt(x_amce[["std.error.high"]]^2 + x_amce[["std.error.low"]]^2)
+
+x_merged <- rbind(x_mm[c("level", "diff", "diff_se", "ref_category")], x_amce[c("level", "diff", "diff_se", "ref_category")])
+x_merged[["ref_category"]] <- factor(x_merged[["ref_category"]], levels = c("Marginal Mean", levels(x_amce[["ref_category"]])))
+x_merged[["is_mm"]] <- ifelse(x_merged[["ref_category"]] == "Marginal Mean", "Difference in MMs", "Difference in AMCEs")
+
+ggplot(x_merged, aes(x = diff, y = level, group = ref_category, colour = is_mm, shape = is_mm)) +
+  geom_vline(xintercept = 0, colour = "gray") +
+  geom_point(aes(shape = is_mm), position = ggstance::position_dodgev(height = 0.75)) +
+  scale_shape_manual(values = c(16,15), guide = FALSE) + 
+  geom_errorbarh(aes(xmin = diff - diff_se, xmax = diff + diff_se),  
+                 size = 0.2, height = 0,
+                 position = ggstance::position_dodgev(height = 0.75)) + 
+  #scale_colour_discrete(guide = ggplot2::guide_legend(title = "Reference Category")) +
+  scale_colour_manual(values = c("gray", "red"), guide = ggplot2::guide_legend(title = "Estimate Type")) +
+  scale_x_continuous(oob = scales::rescale_none) +
+  ylab("") +
+  xlab("Estimated Difference") + 
+  theme_minimal() + 
+      ggplot2::theme(
+        legend.position = "right",
+        panel.grid.major = ggplot2::element_blank(),
+        panel.grid.minor = ggplot2::element_blank()
+      )
+@
+
+Indeed, the difference in AMCEs most closely approximates the difference in marginal means (and thus the descriptive difference in preferences) when the true difference in preferences in the reference category is close to zero. For example, in the above figure differences in AMCEs are shown in gray and differences in marginal means are shown in red, for respondents scoring above-median (high) and below-median (low) in ethnocentrism for each possible country of origin in Hainmueller et al.'s (2014) immigration experiment. The difference in marginal means between high and low ethnocentrism respondents is smallest for immigrants arriving from Iraq. When Iraq is used as the reference category, the AMCE of Iraq is fixed at zero and the between-group difference in AMCEs is thus, by definition, also fixed at zero. These estimates are shown at the top of each grouping - as should be readily clear, when Iraq is used as the reference category, the difference in AMCEs for each of the other possible origin countries closely approximates (but does not exactly equal) the difference in marginal means for that origin country. Were there no feature level for which the two groups held similar preferences, then there would be no reference category that would generate differences in AMCES that were close to the difference in underlying marginal means.
+
+When other origin countries are used as the reference category (wherein the underlying difference in preferences between high ethnocentrism and low enthnocentrism respondents is greater), then the difference in AMCEs provides biased estimates of the difference in preferences. Take, for example, the difference in preferences over immigrants from China, where high ethnocentrism respondents are less favourable to these immigrants than low ethnocentrism respondents. The difference in marginal means is -0.033. Yet differences in AMCEs for Chinese immigrants vary substantially depending on which other category is chosen as the baseline. If China is the baseline, the apparent difference in preferences is zero (definitionally). While in most cases the difference in AMCEs takes the same sign as the difference in marginal means, when either Mexico or Sudan is used as the reference category the apparent difference in preferences flips signs: high ethnocentrism respondents appear to be more rather than less favorable toward Chinese immigrants when the AMCEs are estimated in that way.
+
+Yet the graph also makes clear that the differences in AMCEs all center upon the true difference in marginal means in a fixed manner.
+
+Thus the choice of reference category - while seemingly irrelevant - has dramatic inferential consequences.
+
+\section{Suggested Approaches}
+
+% Present marginal means overall and for specific subgroups of interest
+
+
+\section{Conclusion}
+
+This paper has several identified challenges related to the analysis and reporting of conjoint experimental designs, particularly analyses of subgroup differences. It suggests that authors should report not only average marginal component effects (AMCEs) but also descriptive quantities that better convey subgroup differences.
+
+\singlespacing
+\bibliographystyle{apsa-leeper}
+\bibliography{References}
+\clearpage
+
+\end{document}
