@@ -1,2 +1,7 @@
 cache/*
 papers/*
+*.bib.bak
+*.bib.sav
+*.aux
+*.bbl
+*.blg
