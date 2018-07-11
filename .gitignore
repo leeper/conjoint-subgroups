@@ -5,3 +5,7 @@ papers/*
 *.aux
 *.bbl
 *.blg
+*txs*
+*.dvi
+misc/*
+data/*
