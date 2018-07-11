@@ -1,5 +1,8 @@
 cache/*
+data/*
+misc/*
 papers/*
+submission/*
 *.bib.bak
 *.bib.sav
 *.aux
@@ -7,5 +10,3 @@ papers/*
 *.blg
 *txs*
 *.dvi
-misc/*
-data/*
