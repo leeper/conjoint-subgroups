@@ -10,3 +10,5 @@ submission/*
 *.blg
 *txs*
 *.dvi
+*.mtc*
+*.toc*
