@@ -3,6 +3,7 @@ data/*
 misc/*
 papers/*
 submission/*
+figure/*.png
 *.bib.bak
 *.bib.sav
 *.aux
