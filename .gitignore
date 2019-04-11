@@ -13,3 +13,4 @@ figure/*.png
 *.dvi
 *.mtc*
 *.toc*
+*.log
