@@ -31,7 +31,7 @@
 @
 
 <<knitr_options, cache=FALSE, echo=FALSE, results="hide">>=
-knitr::opts_chunk$set(cache = TRUE, echo=FALSE, results="hold", warning=FALSE, error=FALSE)
+knitr::opts_chunk$set(cache = TRUE, echo=FALSE, results="hold", warning=FALSE, error=FALSE, message=FALSE)
 options(scipen = 10)
 @
 
@@ -283,7 +283,7 @@ if (file.exists("data/tkr.rds")) {
 @
 
 \clearpage
-
+\doublespacing
 
 One aspect of the dramatic increase in the use of experiments within political science \citep{Druckmanetal2006, Mutz2011} is the establishment of conjoint experimental designs as a prominent methodological tool. While survey experiments have traditionally examined just one or two factors that might shape outcomes \citep[see, for reviews,][]{GainesKuklinskiQuirk2007, Sniderman2011}, conjoint designs allow researchers to study the independent effects on preferences of many features of complex, multidimensional objects. These include many different types of phenomena, such as political candidates \citep{Campbelletal2016, TeeleKallaRosenbluth2018}, immigrant admissions \citep{HainmuellerHopkins2015, BansakHainmuellerHangartner2016, WrightLevyCitrin2016}, and public policies \citep{GallegoMarx2017, Hankinson2018}. Factorial designs of this sort have a long history, but the driving force behind this use of conjoint analysis has been the introduction by \citet{HainmuellerHopkinsYamamoto2014} of a small-sample, fully randomized conjoint design. The associated analytic approach emphasizes a single quantity of interest: the average marginal component effect (AMCE). By capturing the multidimensionality of target objects, the randomized conjoint design breaks any explicit, or implicit, confounding between features of these objects. This gives the AMCE a clear causal interpretation: the degree to which a given value of a feature increases, or decreases, respondents' favorability towards a packaged conjoint profile relative to a baseline. 
 
@@ -565,7 +565,7 @@ rm(main, mm_diff, amce_diffs, diffs)
 
 
 
-We can also see this bias in a reanalysis of \citeauthor{BechtelScheve2013}'s four-country climate change agreement experiment. Figure \ref{fig:bechtel_difference_comparison} shows an analysis for the feature capturing the monthly household cost for a potential international climate agreement. This replicates a portion of their results which compare high- and low-environmentalism respondents pooled across countries (\citet[13767 figure 4]{BechtelScheve2013}. The original analysis has conditional AMCEs for the two subgroups with 28 Euro per month as the reference category. Conditional AMCEs for both groups are presented as negative with conditional AMCEs for low-environmentalism respondents being more negative than the conditional AMCEs for high-environmentalism respondents at every feature level. This implies positive differences in favorability toward each monthly cost between high- and low-environmentalism respondents. Figure \ref{fig:bechtel_difference_comparison} presents the implied difference-in-AMCEs from the original analysis as black circles, demonstrating the substantial and positive \textit{apparent} differences between the two groups. For example, the difference-in-AMCEs for the 56 Euro per month level (incorrectly) implies that high-environmentalism respondents are \textit{more} favorable toward a 56 Euro per month household cost of an agreement than are low-environmentalism respondents. Yet the opposite is actually true: high environmentalism respondents are less favorable toward this option than low environmentalism respondents. By using the 28 Euro per month level as the reference category, the original analysis implies that preferences are identical between the two groups when in reality high-environmentalism respondents are much less favorable toward a 28 Euro per month cost than low-environmentalism respondents. The black diamonds in Figure \ref{fig:bechtel_difference_comparison} show these true differences in favorability as marginal means for the two groups.
+Visual or numerical similarity of subgroup AMCEs is therefore an analytical artefact, not an accurate statement of the similarity of patterns of preferences. We can see this bias in a reanalysis of \citeauthor{BechtelScheve2013}'s four-country climate change agreement experiment. Figure \ref{fig:bechtel_difference_comparison} shows an analysis for the feature capturing the monthly household cost for a potential international climate agreement. This replicates a portion of their results which compare high- and low-environmentalism respondents pooled across countries \citep[13767 figure 4]{BechtelScheve2013}. The original analysis has conditional AMCEs for the two subgroups with 28 Euro per month as the reference category. Conditional AMCEs for both groups are presented as negative with conditional AMCEs for low-environmentalism respondents being more negative than the conditional AMCEs for high-environmentalism respondents at every feature level. This implies positive differences in favorability toward each monthly cost between high- and low-environmentalism respondents. Figure \ref{fig:bechtel_difference_comparison} presents the implied difference-in-AMCEs from the original analysis as black circles, demonstrating the substantial and positive \textit{apparent} differences between the two groups. For example, the difference-in-AMCEs for the 56 Euro per month level (incorrectly) implies that high-environmentalism respondents are \textit{more} favorable toward a 56 Euro per month household cost of an agreement than are low-environmentalism respondents. Yet the opposite is actually true: high environmentalism respondents are less favorable toward this option than low environmentalism respondents. By using the 28 Euro per month level as the reference category, the original analysis implies that preferences are identical between the two groups when in reality high-environmentalism respondents are much less favorable toward a 28 Euro per month cost than low-environmentalism respondents. The black diamonds in Figure \ref{fig:bechtel_difference_comparison} show these true differences in favorability as marginal means for the two groups.
 
 Furthermore, the gray dots in Figure \ref{fig:bechtel_difference_comparison} represent the alternative differences-in-AMCEs that \textit{could have been generated} from alternative choices of reference category using the same data. Not only is it possible for reference categories choice to significantly color the apparent size of differences between subgroup, that choice can also impact the direction and statistical significance of subgroup differences. An analyst could easily choose a reference category that presents differences between these two group as large and positive, small and positive, small and negative, large and negative, or negligible. The original analysis (again, black circles) happens to show large and positive differences between the groups.
 
@@ -575,6 +575,10 @@ Second, and more practically, because there is no category for which the prefere
 
 
 \section*{Improved Subgroup Analyses in Conjoint Designs}\label{sec:marginalmeans}
+
+Researchers and consumers of conjoints can avoid the inferential errors that accompany conditional AMCEs by focusing attention on (subgroup) marginal means, differences between subgroup marginal means to infer subgroup differences in preferences toward particular features, and omnibus nested model comparisons to infer subgroup differences across many features. To demonstrate each of these three techniques we provide a complete example based upon \citeauthor{HainmuellerHopkinsYamamoto2014}'s analysis of their immigration conjoint by respondent enthnocentrism, which finds that ``the patterns of support are generally similar for respondents irrespective of their level of ethnocentrism'' \citep[22]{HainmuellerHopkinsYamamoto2014}. First, we show how different reference categories could have led to distinctly different conditional AMCEs and, therefore, interpretations of subgroup preference similarity. Second, we show how differences in marginal means clearly convey the similarity of these two subgroups without any sensitivity to reference category. Finally, we show how tested model comparisons would have provided \citeauthor{HainmuellerHopkinsYamamoto2014} with a statistic test of the claimed similarity in levels of support between these two respondent subgroups.
+
+
 
 <<hainmueller_subgroup_example, dependson=c("data_hainmueller_immigration")>>=
 # estimates benchmarked to largest difference between subgroups
@@ -612,54 +616,62 @@ amce_by_ethnocentrism_2$dataset <- "B"
 amce_ref_example_merged <- rbind(amce_by_ethnocentrism_1, amce_by_ethnocentrism_2)
 @
 
-<<hainmueller_subgroup_example_plot, dependson=c("data_hainmueller_immigration", "hainmueller_subgroup_example"), fig.width=8, fig.height=12, fig.cap="Comparison of AMCEs for Low- and High-Ethnocentrism Respondents Using Two Alternative Reference Categories Choices for Hainmueller et al. (2014) Immigration Experiment", message=FALSE>>=
-plot(amce_ref_example_merged, group = "ethnocentrism_split", feature_headers = FALSE, legend_title = "Ethnocentrism", vline = 0) + 
-  scale_colour_manual("Ethnocentrism", limits = c("high", "low"), values = c("Red", "Blue")) +
-  facet_grid(rows = vars(feature), cols = vars(dataset), scales = "free_y", space = "free_y", labeller = function(x) label_value(x, multi_line = FALSE)) +
-  theme(strip.text.x = element_text(size = 8),
-        strip.text.y = element_text(size = 5))
+<<hainmueller_subgroup_example_plot, dependson=c("data_hainmueller_immigration", "hainmueller_subgroup_example"), fig.width=8, fig.height=6, fig.cap="Comparison of AMCEs for Low- and High-Ethnocentrism Respondents Using Two Alternative Reference Categories Choices for Hainmueller et al. (2014) Immigration Experiment", message=FALSE>>=
+plot(
+  subset(
+    amce_ref_example_merged,
+    feature %in% c("Education", "CountryOfOrigin", "Job")
+  ),
+  group = "ethnocentrism_split", 
+  feature_headers = FALSE, 
+  legend_title = "Ethnocentrism", 
+  vline = 0
+) + 
+  scale_colour_manual(
+    "Ethnocentrism", limits = c("high", "low"), values = c("Red", "Blue")
+  ) +
+  facet_grid(
+    rows = vars(feature), 
+    cols = vars(dataset), 
+    scales = "free_y", 
+    space = "free_y", 
+    labeller = function(x) label_value(x, multi_line = FALSE)
+  ) +
+  theme(
+    strip.background = element_rect(fill="white", colour="white"),
+    strip.text.x = element_text(size = 8),
+    strip.text.y = element_blank()
+  )
 @
 
-Researchers and consumers of conjoints can avoid the inferential errors that accompany conditional AMCEs by focusing attention on (subgroup) marginal means, differences between subgroup marginal means to infer subgroup differences in preferences toward particular features, and omnibus nested model comparisons to infer subgroup differences across many features. To demonstrate each of these three techniques
+To begin, consider the left and right facets of Figure \ref{fig:hainmueller_subgroup_example_plot}, which shows estimated subgroup AMCEs for three features from the immigration study. In panel ``A'' (left), all features are configured so that the reference category is the one with the largest difference in levels of support between the two subgroups. In panel ``B'' (right), all features are configured so that the reference category is the one with the smallest difference in preferences between the two subgroups.
 
+Panel A gives the impression that there are significant differences in preferences between high and low ethnocentrism respondents toward immigrants from different countries of origin, with different careers, and with different educational attainments because the reference category choice cascades the difference in reference category favorability into AMCEs for all other feature levels. By contrast, Panel B gives the impression that these differences are negligible. The experimental data and analytic approach in the two portrayals is identical; the only difference is the choice of reference category. Given what we have shown about the relationship between differences in conditional AMCEs and differences in conditional marginal means, Panel B is the more truthful visualization \citep{Cairo2016}. The differences between subgroup AMCEs there more accurately convey differences in underlying preferences because the reference categories used in Panel B are the most similar between the two groups.
 
-Here we provide a more complete example, demonstrating the full extent of this problem for interpretation of conjoint results and present alternative forms of analysis that more robustly convey subgroup preferences and the differences (if any) between them. Specifically, we show how reference category changes can lead to visual patterns of differences-in-AMCEs that provide strikingly different interpretations. We then show how to visualize and formally compare subgroup marginal means using simple means comparisons tests to avoid this problem. Finally, we demonstrate how to use nested model comparison tests to formally test for omnibus differences between groups.
-
-Consider the left and right facets of Figure \ref{fig:hainmueller_subgroup_example_plot}, which show the exact same analysis (comparing AMCEs for high and low ethnocentrism respondents) on the same experimental data from \citeauthor{HainmuellerHopkinsYamamoto2014}'s immigration experiment. In panel ``A'' (left), all features are configured so that the reference category is the one with the largest difference in preferences between the two subgroups. In panel ``B'' (right), all features are configured so that the reference category is the one with the smallest difference in preferences between the two subgroups.\footnote{The appendix contains comparable plots for experiments by \citet{BechtelScheve2013} and \citet{TeeleKallaRosenbluth2018}.}
-
-Panel A gives the impression that there are significant differences in preferences between high and low ethnocentrism respondents toward immigrants from different countries of origin, with different careers, and with different educational attainments. By contrast, Panel B gives the impression that these differences --- indeed all differences --- are negligible. The experimental data and analytic approach in the two portrayals is identical; the only difference is the choice of reference category for the profile features. Given what we have shown about the relationship between differences in conditional AMCEs and differences in conditional marginal means, Panel B is the more truthful visualization \citep{Cairo2016}. The differences between subgroup AMCEs there more accurately convey differences in underlying preferences because the reference categories used in Panel B are the most similar between the two groups. Yet even this may not \textit{perfectly} convey differences because no feature generates perfect agreement between the subgroups.
-
-<<hainmueller_mm_diffs, dependson=c("data_hainmueller_immigration"), fig.height = 14, fig.width=10, fig.cap="Differences in Conditional Marginal Means, by Ethnocentrism, for Hainmueller et al.'s (2014) Immigration Experiment", message=FALSE>>=
-mm_by_ethnocentrism <- cj(subset(hainmueller_immigration, !is.na(ethnocentrism_split)),
-                          ChosenImmigrant ~ Gender + Education + LanguageSkills + CountryOfOrigin + Job + JobExperience + JobPlans + ReasonForApplication + PriorEntry,
-                          id = ~ CaseID,
-                          estimate = "mm_diff",
-                          by = ~ ethnocentrism_split)
-plot(mm_by_ethnocentrism, vline = 0, xlim = c(-0.3,0.3), xlab = "Estimated Difference in Marginal Means") +
+<<hainmueller_mm_diffs, dependson=c("data_hainmueller_immigration"), fig.height = 5, fig.width=8, fig.cap="Differences in Conditional Marginal Means, by Ethnocentrism, for Hainmueller et al.'s (2014) Immigration Experiment", message=FALSE>>=
+mm_by_ethnocentrism <- cj(
+  subset(hainmueller_immigration, !is.na(ethnocentrism_split)),
+  ChosenImmigrant ~ Gender + Education + LanguageSkills + CountryOfOrigin + Job + JobExperience + JobPlans + ReasonForApplication + PriorEntry,
+  id = ~ CaseID,
+  estimate = "mm_diff",
+  by = ~ ethnocentrism_split
+)
+plot(
+  subset(
+    mm_by_ethnocentrism,
+    feature %in% c("Country of Origin", "Job", "Education")
+  ), 
+  vline = 0, 
+  xlim = c(-0.3,0.3), 
+  xlab = "Estimated Difference in Marginal Means"
+) +
   scale_colour_manual("feature", values = rep("Black", 9)) +
   ggplot2::theme(legend.position = "none")
 @
 
-Alternatively presenting subgroup differences using conditional marginal means (as in Figure \ref{fig:hainmueller_mm_diffs}) provides the intended descriptive comparison of subgroup preferences. Each dot and error bar represents the conditional marginal mean (and its standard error) for high ethnocentrism (in red) and low ethnocentrism (in blue) respondents. This display of conditional marginal means highlights just how similar the preferences are for the two groups. For example, in the first set of estimates, both groups of respondents display minimally positive preferences toward female immigrants and minimally negative preferences toward male immigrants, averaging across those immigrants' other profile features. The second set of estimates shows both group are also more favorable toward higher-educated immigrants and less favorable toward less-education immigrants with no visually apparent differences. The third set of estimates, related to language skills, shows again similar patterns: both groups are more favorable toward immigrants with higher English proficiency than immigrants with lower English proficiency.
+Next, making a comparison of levels of favorability toward different types of immigrants without using AMCEs would have been even more truthful. Figure \ref{fig:hainmueller_mm_diffs} \textit{directly} shows that comparison of preferences as differences in subgroup marginal means between the two groups for these three features, with 95\% confidence intervals for the difference.\footnote{A presentation of subgroup marginal means for all features can be found in Appendix \ref{app:hainmuellerimmigration}.} The two groups indeed have similar preferences, something that would have happened to be clear had the conditional AMCEs in the right panel of Figure \ref{fig:hainmueller_subgroup_example_plot} been presented but that would have been far less obvious were the conditional AMCEs in the left panel of that figure presented. Pairwise difference in means tests would provide formal procedures for testing the statistical significance of these differences.
 
-These estimates are less obviously identical for the two groups but look quite close. To test for pairwise differences between high and low ethnocentrism respondents, we can calculate differences in conditional conditional marginal means at each feature level, with associated significance tests:
-
-\begin{itemize}
-<<hainmueller_mmdiffs_by_ethnocentrism, dependson=c("data_hainmueller_immigration"), results="asis">>=
-mmdiffs_by_ethnocentrism <- cj(subset(hainmueller_immigration, !is.na(ethnocentrism_split)), ChosenImmigrant ~ Gender + Education + LanguageSkills + CountryOfOrigin + Job + JobExperience + JobPlans + ReasonForApplication + PriorEntry, id = ~ CaseID, estimate = "mm_diff", by = ~ ethnocentrism_split)
-mmd <- mmdiffs_by_ethnocentrism[mmdiffs_by_ethnocentrism$feature == "Language Skills", c("level", "estimate", "std.error", "z", "p")]
-cat(sprintf("\\item %s: %0.2f (%0.2f, $z_{\\text{diff}}$=%0.2f, $p\\leq %0.2f$)\n", mmd[[1]][1], mmd[[2]][1], mmd[[3]][1], mmd[[4]][1], mmd[[5]][1]))
-cat(sprintf("\\item %s: %0.2f (%0.2f, $z_{\\text{diff}}$=%0.2f, $p\\leq %0.2f$)\n", mmd[[1]][2], mmd[[2]][2], mmd[[3]][2], mmd[[4]][2], mmd[[5]][2]))
-cat(sprintf("\\item %s: %0.2f (%0.2f, $z_{\\text{diff}}$=%0.2f, $p\\leq %0.2f$)\n", mmd[[1]][3], mmd[[2]][3], mmd[[3]][3], mmd[[4]][3], mmd[[5]][3]))
-cat(sprintf("\\item %s: %0.2f (%0.2f, $z_{\\text{diff}}$=%0.2f, $p\\leq %0.2f$)\n", mmd[[1]][4], mmd[[2]][4], mmd[[3]][4], mmd[[4]][4], mmd[[5]][4]))	
-@
-\end{itemize}
-
-<<hainmueller_language_diffs, dependson=c("data_hainmueller_immigration"), eval=TRUE, echo=FALSE>>=
-hainmueller_anova_language <- cj_anova(subset(hainmueller_immigration, !is.na(ethnocentrism_split)), ChosenImmigrant ~ LanguageSkills, id = ~ CaseID, by = ~ ethnocentrism_split)
-@
-
-\noindent These pairwise tests show that are our eyes have not deceived us. None of the level-specific differences in conditional marginal means are statistically distinguishable from zero. Were we interested in an omnibus tests of whether any of these differences were non-zero, we could perform a nested model comparison of two equations: (a) one estimating only marginal effects of the ``Language Skills'' feature levels, and (b) the same model with additional interactions between the subgrouping covariate and the feature levels. The test compares the sum of squared residuals for the two equations.
+Yet, finally, the similarity of subgroup preferences in conjoints is often characterized in an \textit{omnibus} fashion, as in the quote from \citet{HainmuellerHopkinsYamamoto2014} describing ``patterns of support.'' An appropriate test in such cases is one that evaluates whether a model of support that accounts for group differences better fits the data than a model of support with only conjoint features as predictors. This type of test is known as a ``nested model comparison'' which compares the fit of a ``restricted'' regression (the restriction being that interactions between features and a subgroup identifier are held to be zero) nested within an ``unrestricted'' regression that allows for arbitrary interactions between conjoint features and the subgroup identifier. Formally, a nested model comparison provides an F-test of the null hypothesis that all interaction terms are equal to zero.\footnote{Like any ANOVA this hypothesis test may yield substantively different insight from a series of tests of pairwise mean differences. Figure \ref{fig:hainmueller_mm_diffs} shows three instances where the confidence intervals for pairwise differences in marginal means do not include zero even though the omnibus test fails to reject the null.}
 
 To make this concrete, for a feature with four levels (one treated as a reference category), the first (restricted) equation would be:
 
@@ -676,14 +688,17 @@ Y = & \beta_0 + \beta_1 Level_1 + \beta_2 Level_2 + \beta_3 Level_3 + \beta_4 Gr
 \end{split}
 \end{equation}
 
-\noindent While Equation \ref{eq:restricted} imposes the constraint that $\beta_4 = \beta_5 = \beta_6 = \beta_7 = 0$, Equation \ref{eq:unrestricted} allows for subgroup differences in favorability. The nested model comparison allows us to test the joint null hypothesis that there are no differences between the subgroups in any of the feature levels. This entails computing an F-statistic:
+\noindent While Equation \ref{eq:restricted} imposes the constraint that $\beta_4 = \beta_5 = \beta_6 = \beta_7 = 0$, Equation \ref{eq:unrestricted} allows for subgroup differences in favorability. Testing this null entails computing an F-statistic comparing the fit of each equation:
 
 \begin{equation}
 F = \dfrac{\dfrac{SSR_{Restricted} - SSR_{Unrestricted}}{r}}{\dfrac{SSR_{Unrestricted}}{n - k - 1}}
 \end{equation}
 
-\noindent where $SSR_{Restricted}$ is the sum of squared residuals for Equation \ref{eq:restricted}, $SSR_{Unrestricted}$ is the sum of squared residuals for Equation \ref{eq:unrestricted}, where $r$ is the number of restrictions (in the above example, 4), $n$ is the number of cases, and $k$ is the number of feature levels in the unrestricted model. Note that this test is not sensitive to reference category used in the regression 
+\noindent where $SSR_{Restricted}$ is the sum of squared residuals for Equation \ref{eq:restricted}, $SSR_{Unrestricted}$ is the sum of squared residuals for Equation \ref{eq:unrestricted}, where $r$ is the number of restrictions (in the above example, 4), $n$ is the number of cases, and $k$ is the number of feature levels in the unrestricted model.\footnote{Note that this test is not sensitive to reference category even though it requires specifying a regression equation.}
 
+<<hainmueller_language_diffs, dependson=c("data_hainmueller_immigration"), eval=TRUE, echo=FALSE>>=
+hainmueller_anova_language <- cj_anova(subset(hainmueller_immigration, !is.na(ethnocentrism_split)), ChosenImmigrant ~ LanguageSkills, id = ~ CaseID, by = ~ ethnocentrism_split)
+@
 
 For the \citeauthor{HainmuellerHopkinsYamamoto2014} language feature, the resulting F-test for the model comparison in this case again gives us little reason to believe there are subgroup differences: \Sexpr{sprintf("F(%d, %d)=%0.2f, $p\\leq%0.2f$", hainmueller_anova_language$Df[2], hainmueller_anova_language[["Resid. Df"]][1], hainmueller_anova_language$F[2], hainmueller_anova_language$"Pr(>F)"[2])}. We could repeat such pairwise comparisons or omnibus comparisons for each feature in the design.
 
@@ -700,20 +715,20 @@ bechtel_anova_country <- cj_anova(subset(bechtel, !is.na(country)), choice_cj ~ 
 bechtel_anova_country_cost <- cj_anova(subset(bechtel, !is.na(country)), choice_cj ~ cost_cj, id = ~ ID, by = ~ country)
 @
 
-As before, we can perform an omnibus tests for the presence of any subgroup differences across all features, again using nested model comparison of two equations: (a) one estimating only effects of the features, and (b) the same model with additional interactions between the subgrouping covariate and all features. The result of that test for differences by ethnocentrism from the immigration experiment is: \Sexpr{sprintf("F(%d, %d)=%0.2f, $p\\leq%0.2f$", hainmueller_anova_all$Df[2], hainmueller_anova_all[["Resid. Df"]][1], hainmueller_anova_all$F[2], hainmueller_anova_all$"Pr(>F)"[2])}, which further demonstrates that the substantive interpretation provided by \citet{HainmuellerHopkinsYamamoto2014} accurately identified a lack of between-group differences. By contrast, \citet{BechtelScheve2013} argue in their cross-country conjoint examining climate change agreements ``that individuals in all four countries largely agree on which dimensions are important and to what extent'' \citep[13765]{BechtelScheve2013}. Yet a nested model comparisons shows the countries do differ in their preferences \Sexpr{sprintf("F(%d, %d)=%0.2f, $p\\leq%0.2f$", bechtel_anova_country$Df[2], bechtel_anova_country[["Resid. Df"]][1], bechtel_anova_country$F[2], bechtel_anova_country$"Pr(>F)"[2])}. This cross-country variation is largely driven by differences in sensitivity to monthly household costs feature, \Sexpr{sprintf("F(%d, %d)=%0.2f, $p\\leq%0.2f$", bechtel_anova_country_cost$Df[2], bechtel_anova_country_cost[["Resid. Df"]][1], bechtel_anova_country_cost$F[2], bechtel_anova_country_cost$"Pr(>F)"[2])}, with the United Kingdom and United States being more cost sensitive than Germany and France as is plainly visible in a plot of marginal means by country (see SI).
+As before, we can perform an omnibus tests for the presence of any subgroup differences across all features, again using nested model comparison of two equations: (a) one estimating only effects of the features, and (b) the same model with additional interactions between the subgrouping covariate and all features. The result of that test for differences by ethnocentrism from the immigration experiment is: \Sexpr{sprintf("F(%d, %d)=%0.2f, $p\\leq%0.2f$", hainmueller_anova_all$Df[2], hainmueller_anova_all[["Resid. Df"]][1], hainmueller_anova_all$F[2], hainmueller_anova_all$"Pr(>F)"[2])}, which further demonstrates that the substantive interpretation provided by \citet{HainmuellerHopkinsYamamoto2014} accurately identified a lack of between-group differences.
 
-This kind of nested model comparison test can also be used to assess heterogeneity across conjoint features \citep[see also][]{EgamiImai2018}. For example, \citet{TeeleKallaRosenbluth2018} report just such a test for how effects of features other than candidate sex may differ between male and female candidates, finding no such heterogeneity (8--9). Fortunately, the original analysis accurately detected an absence of subgroup differences, yet a subtly different set of analytic decisions about reference categories (as shown in Figure \ref{fig:hainmueller_subgroup_example_plot}) could have led to an quite different conclusion.
+This kind of nested model comparison test can also be used to assess heterogeneity across conjoint features \citep[see also][]{EgamiImai2018}. For example, \citet{TeeleKallaRosenbluth2018} report just such a test for how effects of features other than candidate sex may differ between male and female candidates, finding no such heterogeneity (8--9). Fortunately, the original analysis accurately detected an absence of subgroup differences, yet a subtly different set of analytic decisions about reference categories (as shown in Figure \ref{fig:hainmueller_subgroup_example_plot}) could have led to a quite different conclusion. As an example, \citet{BechtelScheve2013} argue that their conjoint results show ``individuals in all four countries largely agree on which dimensions are important and to what extent'' \citep[13765]{BechtelScheve2013}, but a nested model comparison shows the countries do differ in their preferences \Sexpr{sprintf("F(%d, %d)=%0.2f, $p\\leq%0.2f$", bechtel_anova_country$Df[2], bechtel_anova_country[["Resid. Df"]][1], bechtel_anova_country$F[2], bechtel_anova_country$"Pr(>F)"[2])}. This cross-country variation largely driven by differences in sensitivity to monthly household costs feature, \Sexpr{sprintf("F(%d, %d)=%0.2f, $p\\leq%0.2f$", bechtel_anova_country_cost$Df[2], bechtel_anova_country_cost[["Resid. Df"]][1], bechtel_anova_country_cost$F[2], bechtel_anova_country_cost$"Pr(>F)"[2])}, with the United Kingdom and United States being more cost sensitive than Germany and France. Visual comparisons of conditional AMCEs can sometimes provide accurate insights into subgroup differences in preferences, but ulimately there is no guarantee that they do in any particular analysis.
 
 \section*{Conclusion}\label{sec:conclusion}
 
-This article has identified several challenges related to the analysis and reporting of conjoint experimental designs, particularly analyses of subgroup differences. We suggest that conjoint analyses should report not only average marginal component effects (AMCEs) but also descriptive quantities that better convey underlying preferences over profile features and better convey subgroup differences in those preferences. Our intention here is not to substantively undermine any previous set of results, but instead to urge researchers moving forward to demonstrate considerable caution in how they design, analyze, and present the results of these types of descriptive experiments. We have relatively straightforward and hopefully uncontroversial advice for how analysts of conjoint experiments should proceed:
+This article has identified several challenges related to the analysis and reporting of conjoint experimental designs, particularly analyses of subgroup differences. We suggest that conjoint analyses should report not only average marginal component effects (AMCEs) but also descriptive quantities that better convey underlying preferences over profile features and better convey subgroup differences in those preferences. Marginal means contain all of the information provided by AMCEs and more. Consequently, our intention here is not to substantively undermine any previous set of results, but instead to urge researchers moving forward to demonstrate considerable caution in how they design, analyze, and present the results of these types of descriptive experiments. We have relatively straightforward and hopefully uncontroversial advice for how analysts of conjoint experiments should proceed:
 
 \begin{enumerate}
 \item Always report unadjusted marginal means when attempting to provide a \textit{descriptive} summary of respondent preferences in addition to, or instead of, AMCEs.\footnote{Like the presentation of AMCEs, displaying marginal means in constrained conjoint designs may also distort apparent patterns given that not all features can co-occur. Partitioning the design into fractions such that each fraction contains a fully unconstrained design would mitigate any concern with that presentation.}
 
 \item Exercise caution when explicitly, or implicitly, interpreting differences-in-AMCEs across subgroups. Differences-in-AMCEs are differences in effect sizes for subgroups, not statments about the relative favorability of the subgroups toward profiles with a given feature. Heterogeneous effects do not necessarily mean different underlying preferences. If differences in AMCEs are reported, the choice of reference categories should be discussed explicitly and diagnostics should be provided to justify it.
 
-\item When descriptively characterizing differences in preferences between subgroups, directly estimate the subgroup difference using conditional marginal means and differences between conditional marginal means, rather than relying on the difference-in-AMCEs.
+\item When descriptively characterizing differences in preference level between subgroups, directly estimate the subgroup difference using conditional marginal means and differences between conditional marginal means, rather than relying on the difference-in-AMCEs.
 
 \item To formally test for group differences in preferences, regression with interaction terms between the subgrouping covariate and all feature levels will generate estimates of level-specific differences in preferences via the coefficients on the interaction terms.\footnote{The analysis is slightly more complicated in constrained designs.} A nested model comparison between this equation against one without such interactions provides an omnibus test of subgroup differences, which should be reported when characterizing overall patterns of subgroup differences.
 \end{enumerate}
@@ -722,7 +737,7 @@ This article has identified several challenges related to the analysis and repor
 
 The popularity of conjoint analyses in recent years highlights the power of the design and the important contributions made by \citet{HainmuellerHopkinsYamamoto2014} in providing a novel causal interpretation of these fully randomized factorial designs. Yet with new tools always come new challenges. The now-common practice of descriptively interpreting conjoints requires more caution than is immediately obvious. This paper has demonstrated several such challenges and hopefully provides useful advice for how researchers should proceed with the analysis of such designs.
 
-To facilitate such analysis and, especially, to provide easy-to-use tools for calculating marginal means and performing reference category selection diagnostics, we provide software called \textbf{cregg} \citep{Leeper2018cregg} that will perform these analyses and also provides the simple-to-use visualization tools used throughout this article. With that resource in-hand, researchers should be well-equipped to analyze conjoint designs without running into the analytic challenges discussed here.
+To facilitate such analysis and, especially, to provide easy-to-use tools for calculating marginal means and performing reference category selection diagnostics, we provide software called \textbf{cregg} \citep{Leeper2018cregg} available from the Comprehensive R Archive Network; this manuscript is written as a reproducible knitr document \citep{Xie2015} that contains complete code examples that will perform all analyses and visualization used throughout this article. With that resource in-hand, researchers should be well-equipped to analyze conjoint designs without running into the analytic challenges discussed here.
 
 
 
@@ -954,22 +969,55 @@ gridExtra::grid.arrange(gA, gB, gC, gD, ncol = 1)
 
 \clearpage 
 
-\section{Hainmueller et al. (2014) Candidate Experiment}
+\section{Hainmueller et al. (2014) Candidate Experiment}\label{app:hainmuellercandidate}
 
-\subsection{Replication using AMCEs}
+\subsection{Replication using AMCEs and MMs}
 
 <<hainmueller_candidate_amce_appendix, dependson=c("data_hainmueller_candidate"), fig.height=8, fig.width=8>>=
-plot(
-  cj(
+p1 <- plot(
+  cregg::cj(
    hainmueller_candidate, 
    selected ~ atmilitary + atreligion + ated + atprof + atinc + atrace + atage + atmale,
    id = ~ resID,
    estimate = "amce"
-  )
-)
+  ), vline = 0
+) + 
+  ggplot2::scale_x_continuous(
+    limits = c(-0.4, 0.4), 
+    breaks = c(-0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4)
+  ) + 
+  ggplot2::geom_text(
+    aes(label = ifelse(is.na(std.error), "", sprintf("%0.2f (%0.2f)", estimate, std.error))),
+    colour = "black", 
+    size = 2,
+    position = position_nudge(y = .5)
+ ) + 
+ theme(legend.position="none")
+p2 <- plot(
+  cregg::cj(
+   hainmueller_candidate, 
+   selected ~ atmilitary + atreligion + ated + atprof + atinc + atrace + atage + atmale,
+   id = ~ resID,
+   estimate = "mm"
+  ), vline = 0.5
+) + 
+  ggplot2::scale_x_continuous(
+    limits = c(0.1, 0.9), 
+    breaks = c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
+  ) + 
+  ggplot2::geom_text(
+    aes(label = sprintf("%0.2f (%0.2f)", estimate, std.error)),
+    colour = "black", 
+    size = 2,
+    position = position_nudge(y = .5)
+  ) + 
+  theme(legend.position="none")
+gridExtra::grid.arrange(p1, p2, ncol=2)
 @
 
 \clearpage
+
+\subsection{Numerical Results: AMCEs}
 
 <<hainmueller_candidate_amce_table, dependson=c("data_hainmueller_candidate"), results="asis">>=
 print(xtable::xtable(
@@ -985,21 +1033,7 @@ print(xtable::xtable(
 
 \clearpage
 
-\subsection{Replication using MMs}
-
-<<hainmueller_candidate_mm_appendix, dependson=c("data_hainmueller_candidate"), fig.height=8, fig.width=8>>=
-plot(
-  cj(
-   hainmueller_candidate, 
-   selected ~ atmilitary + atreligion + ated + atprof + atinc + atrace + atage + atmale,
-   id = ~ resID,
-   estimate = "mm",
-   h0 = 0.5
-  ), vline = 0.5
-)
-@
-
-\clearpage
+\subsection{Numerical Results: MMs}
 
 <<hainmueller_candidate_mm_table, dependson=c("data_hainmueller_candidate"), results="asis">>=
 print(xtable::xtable(
@@ -1016,18 +1050,51 @@ print(xtable::xtable(
 
 \clearpage
 
-\section{Hainmueller et al. (2014) Immigration Experiment}
+\section{Hainmueller et al. (2014) Immigration Experiment}\label{app:hainmuellerimmigration}
 
-\subsection{Replication using AMCEs}
+\subsection{Replication using AMCEs and MMs}
 
 <<hainmueller_immigration_amce_appendix, dependson=c("data_hainmueller_immigration"), fig.height=8, fig.width=8>>=
-plot(
-  cj(
-   hainmueller_immigration, 
-   ChosenImmigrant ~ Gender + Education + LanguageSkills + CountryOfOrigin + Job + JobExperience + JobPlans + ReasonForApplication + PriorEntry + Education:Job + CountryOfOrigin:ReasonForApplication,
-   id = ~ CaseID
-  )
-)
+p1 <- plot(
+  cregg::cj(
+     hainmueller_immigration, 
+     ChosenImmigrant ~ Gender + Education + LanguageSkills + CountryOfOrigin + Job + JobExperience + JobPlans + ReasonForApplication + PriorEntry + Education:Job + CountryOfOrigin:ReasonForApplication,
+     id = ~ CaseID
+  ), vline = 0
+) + 
+  ggplot2::scale_x_continuous(
+    limits = c(-0.4, 0.4), 
+    breaks = c(-0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4)
+  ) + 
+  ggplot2::geom_text(
+    aes(label = ifelse(is.na(std.error), "", sprintf("%0.2f (%0.2f)", estimate, std.error))),
+    colour = "black", 
+    size = 2,
+    position = position_nudge(y = .5)
+ ) + 
+ theme(legend.position="none")
+p2 <- plot(
+  cregg::cj(
+     hainmueller_immigration, 
+     ChosenImmigrant ~ Gender + Education + LanguageSkills + CountryOfOrigin + Job + JobExperience + JobPlans + ReasonForApplication + PriorEntry,
+     id = ~ CaseID,
+     estimate = "mm"
+  ), vline = 0.5
+) + 
+  ggplot2::scale_x_continuous(
+    limits = c(0.1, 0.9), 
+    breaks = c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
+  ) + 
+  ggplot2::geom_text(
+    aes(label = sprintf("%0.2f (%0.2f)", estimate, std.error)),
+    colour = "black", 
+    size = 2,
+    position = position_nudge(y = .5)
+  ) + 
+  theme(legend.position="none")
+#gridExtra::grid.arrange(p1, p2, ncol=2)
+p1
+p2
 @
 
 \clearpage
@@ -1070,6 +1137,8 @@ plot(
 
 \clearpage
 
+\subsection{Numerical Results: AMCEs}
+
 <<hainmueller_amce_table, dependson=c("data_hainmueller_immigration"), results="asis">>=
 print(xtable::xtable(
   cj(
@@ -1079,26 +1148,13 @@ print(xtable::xtable(
      id = ~ CaseID
   )[c("feature", "level", "estimate", "std.error", "z")],
     digits = 2, align = c("l", "l", "p{3in}", "r", "r", "r")
-), include.rownames = FALSE, size = "footnotesize")
+), include.rownames = FALSE, size = "scriptsize")
 @
+
 
 \clearpage
 
-\subsection{Replication using MMs}
-
-<<hainmueller_immigration_mm_appendix, dependson=c("data_hainmueller_immigration"), fig.height=8, fig.width=8>>=
-plot(
-  cj(
-   hainmueller_immigration, 
-   ChosenImmigrant ~ Gender + Education + LanguageSkills + CountryOfOrigin + Job + JobExperience + JobPlans + ReasonForApplication + PriorEntry + Education:Job + CountryOfOrigin:ReasonForApplication,
-   id = ~ CaseID,
-   estimate = "mm",
-   h0 = 0.5
-  ), vline = 0.5
-)
-@
-
-\clearpage
+\subsection{Numerical Results: MMs}
 
 <<hainmueller_mm_table, dependson=c("data_hainmueller_immigration"), results="asis">>=
 print(xtable::xtable(
@@ -1110,7 +1166,7 @@ print(xtable::xtable(
      h0 = 0.5
   )[c("feature", "level", "estimate", "std.error", "z")],
     digits = 2, align = c("l", "l", "p{3in}", "r", "r", "r")
-), include.rownames = FALSE, size = "footnotesize")
+), include.rownames = FALSE, size = "scriptsize")
 @
 
 \clearpage
@@ -1158,22 +1214,56 @@ cj_anova(subset(hainmueller_immigration, !is.na(ethnocentrism_split)),
 \clearpage
 
 
-\section{Teele et al. (2018) Candidate Experiment}
+\section{Teele et al. (2018) Candidate Experiment}\label{app:tkr}
 
-\subsection{Replication using AMCEs}
+\subsection{Replication using AMCEs and MMs}
 
 <<tkr_amce_appendix, dependson=c("data_tkr"), fig.height=5, fig.width=8>>=
-plot(
-  cj(
-   tkr, 
-   winner ~ feature_sex + feature_experience + feature_marital + feature_job + feature_children + feature_age,
-   id = ~ responseid,
-   estimate = "amce"
-  ),
-)
+p1 <- plot(
+  cregg::cj(
+     tkr, 
+     winner ~ feature_sex + feature_experience + feature_marital + feature_job + feature_children + feature_age,
+     id = ~ responseid,
+     estimate = "amce"
+  ), vline = 0
+) + 
+  ggplot2::scale_x_continuous(
+    limits = c(-0.3, 0.3), 
+    breaks = c(-0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3)
+  ) + 
+  ggplot2::geom_text(
+    aes(label = ifelse(is.na(std.error), "", sprintf("%0.2f (%0.2f)", estimate, std.error))),
+    colour = "black", 
+    size = 2,
+    position = position_nudge(y = .5)
+ ) + 
+ theme(legend.position="none")
+p2 <- plot(
+  cregg::cj(
+     tkr, 
+     winner ~ feature_sex + feature_experience + feature_marital + feature_job + feature_children + feature_age,
+     id = ~ responseid,
+     estimate = "mm",
+     h0 = 0.5
+  ), vline = 0.5
+) + 
+  ggplot2::scale_x_continuous(
+    limits = c(0.2, 0.8), 
+    breaks = c(0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8)
+  ) + 
+  ggplot2::geom_text(
+    aes(label = sprintf("%0.2f (%0.2f)", estimate, std.error)),
+    colour = "black", 
+    size = 2,
+    position = position_nudge(y = .5)
+  ) + 
+  theme(legend.position="none")
+gridExtra::grid.arrange(p1, p2, ncol=2)
 @
 
 \clearpage
+
+\subsection{Numerical Results: AMCEs}
 
 <<tkr_amce_table, dependson=c("data_tkr"), results="asis">>=
 print(xtable::xtable(
@@ -1189,21 +1279,7 @@ print(xtable::xtable(
 
 \clearpage
 
-\subsection{Replication using MMs}
-
-<<tkr_mm_appendix, dependson=c("data_tkr"), fig.height=5, fig.width=8>>=
-plot(
-  cj(
-   tkr, 
-   winner ~ feature_sex + feature_experience + feature_marital + feature_job + feature_children + feature_age,
-   id = ~ responseid,
-   estimate = "mm",
-   h0 = 0.5
-  ), vline = 0.5
-)
-@
-
-\clearpage
+\subsection{Numerical Results: MMs}
 
 <<tkr_mm_table, dependson=c("data_tkr"), results="asis">>=
 print(xtable::xtable(
@@ -1310,15 +1386,58 @@ plot(amce_ref_tkr_merged, group = "PartyID", feature_headers = FALSE, legend_tit
 
 \clearpage
 
-\section{Bechtel and Scheve (2013) Climate Agreement Experiment}
+\section{Bechtel and Scheve (2013) Climate Agreement Experiment}\label{app:bechtel}
 
-\subsection{Replication using AMCEs}
+\subsection{Replication using AMCEs and MMs}
 
-<<bechtel_amce, dependson=c("data_bechtel")>>=
-plot(cj(bechtel, choice_cj ~ cost_cj + distrib_cj + ctries_cj + emissions_cj + sanctions_cj + monitoring_cj, weights = ~ weight, id = ~ ID, estimate = "amce"))
+<<bechtel_amce, dependson=c("data_bechtel"), fig.height=8, fig.width=7>>=
+p1 <- plot(
+  cregg::cj(
+     bechtel, 
+     choice_cj ~ cost_cj + distrib_cj + ctries_cj + emissions_cj + sanctions_cj + monitoring_cj,
+     weights = ~ weight,
+     id = ~ ID,
+     estimate = "amce"
+  ), vline = 0
+) + 
+  ggplot2::scale_x_continuous(
+    limits = c(-0.4, 0.4), 
+    breaks = c(-0.4, -0.3, -0.2, -0.1, 0.0, 0.1, 0.2, 0.3, 0.4)
+  ) + 
+  ggplot2::geom_text(
+    aes(label = ifelse(is.na(std.error), "", sprintf("%0.2f (%0.2f)", estimate, std.error))),
+    colour = "black", 
+    size = 2,
+    position = position_nudge(y = .5)
+ ) + 
+ theme(legend.position="none")
+p2 <- plot(
+  cregg::cj(
+     bechtel, 
+     choice_cj ~ cost_cj + distrib_cj + ctries_cj + emissions_cj + sanctions_cj + monitoring_cj,
+     weights = ~ weight,
+     id = ~ ID,
+     estimate = "mm",
+     h0 = 0.5
+  ), vline = 0.5
+) + 
+  ggplot2::scale_x_continuous(
+    limits = c(0.1, 0.9), 
+    breaks = c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
+  ) + 
+  ggplot2::geom_text(
+    aes(label = sprintf("%0.2f (%0.2f)", estimate, std.error)),
+    colour = "black", 
+    size = 2,
+    position = position_nudge(y = .5)
+  ) + 
+  theme(legend.position="none")
+gridExtra::grid.arrange(p1, p2, ncol=1, nrow=2)
 @
 
 \clearpage
+
+\subsection{Numerical Results: AMCEs}
 
 <<bechtel_amce_table, dependson=c("data_bechtel"), results="asis", eval=FALSE>>=
 print(xtable::xtable(
@@ -1330,13 +1449,7 @@ print(xtable::xtable(
 
 \clearpage
 
-\subsection{Replication using MMs}
-
-<<bechtel_mm, dependson=c("data_bechtel")>>=
-plot(cj(bechtel, choice_cj ~ cost_cj + distrib_cj + ctries_cj + emissions_cj + sanctions_cj + monitoring_cj, weights = ~ weight, id = ~ ID, estimate = "mm"), vline = 0.5)
-@
-
-\clearpage
+\subsection{Numerical Results: MMs}
 
 <<bechtel_mm_table, dependson=c("data_bechtel"), results="asis", eval=FALSE>>=
 print(xtable::xtable(
