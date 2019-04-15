@@ -177,7 +177,7 @@ While seemingly arbitrary and innocuous, the choice of reference category can pr
 
 As Table \ref{tab:papers} shows, discussions of conditional AMCEs in conjoint analyses often compare the size, and direction, of subgroup causal effects. Given the common practice of descriptively interpreting conjoint experimental results, such subgroup analyses seem perfectly intuitive. The set of subgroups listed in the last column of Table \ref{tab:papers} contains some unsurprising covariates, such as partisanship, that are of obvious theoretical interest in almost any study of individual preferences. If interpreted as a difference in the size of the \textit{causal effect} for two groups, such comparisons are perfectly consistent with more traditional experimental analysis and a perfectly acceptable interpretation of the conjoint results.
 
-Yet, just as analysis of full sample conjoint data is often descriptive in nature, it is also the case that conjoint analysts frequently interpret differences in conditional AMCEs descriptively rather than causally. For example, in one analysis \citet{HainmuellerHopkinsYamamoto2014} visually compare the pattern of AMCEs among high- and low-ethnocentrism respondents and interpret that ``the patterns of support are generally similar for respondents irrespective of their level of ethnocentrism'' (22). \citet{BallardRosaMartinScheve2016} make similar comparisons in their tax policy conjoint: ``While there are few strong differences in preferences for taxing the lower three income groups (the `hard work' group has slightly lower elasticities for taxing the poor), there are strong differences in preferences for taxing the rich'' (12). In \citet{BechtelScheve2013} conjoint on support for international climate change agreements in the United States, United Kingdom, Germany, and France, they summarize their results as ``We find that individuals in all four countries largely agree on which dimensions are important and to what extent'' (13765). In these examples, the differences between conditional AMCEs are used as a way of descriptively characterizing differences in \textit{preferences} (i.e. levels of support) between the groups rather than differences in \textit{causal effects on preferences} in the groups.
+Yet, just as analysis of full sample conjoint data is often descriptive in nature, it is also the case that conjoint analysts frequently interpret differences in conditional AMCEs descriptively rather than causally. For example, in one analysis \citet{HainmuellerHopkinsYamamoto2014} visually compare the pattern of AMCEs among high- and low-ethnocentrism respondents and interpret that ``the patterns of support are generally similar for respondents irrespective of their level of ethnocentrism'' (22). \citet{BallardRosaMartinScheve2016} make similar comparisons in their tax policy conjoint: ``While there are few strong differences in preferences for taxing the lower three income groups (the `hard work' group has slightly lower elasticities for taxing the poor), there are strong differences in preferences for taxing the rich'' (12). In the \citet{BechtelScheve2013} conjoint on support for international climate change agreements in the United States, United Kingdom, Germany, and France, they summarize their results as ``We find that individuals in all four countries largely agree on which dimensions are important and to what extent'' (13765). In these examples, the differences between conditional AMCEs are used as a way of descriptively characterizing differences in \textit{preferences} (i.e. levels of support) between the groups rather than differences in \textit{causal effects on preferences} in the groups.
 
 The selection of a reference category, while earlier an innocuous analytic decision, becomes substantially consequential for a descriptive reading of conditional AMCEs. Most obviously, using AMCEs descriptively prevents any description of the levels of favorability in the reference category. It can also lead to misinterpretations of patterns in preferences. AMCEs are relative, not absolute, statements about preferences. As such, there is simply no predictable connection between subgroup causal effects and the levels of underlying subgroup preferences. Yet analysts and their readers frequently interpret differences in conditional AMCEs as differences in underlying preferences. AMCEs do provide insight into the descriptive variation in preferences within-group and across-features, and conditional AMCEs do estimate the size of causal effects of features within groups. But AMCEs cannot provide direct insight into the pattern of preferences between groups because they do not provide information about \textit{absolute} levels of favorability toward profiles with each feature (or combination of features).
 
@@ -214,14 +214,12 @@ Visual or numerical similarity of subgroup AMCEs is therefore an analytical arte
 
 Furthermore, the gray dots in Figure \ref{fig:bechtel_difference_comparison} represent the alternative differences-in-AMCEs that \textit{could have been generated} from alternative choices of reference category using the same data. Not only is it possible for reference categories choice to significantly color the apparent size of differences between subgroup, that choice can also impact the direction and statistical significance of subgroup differences. An analyst could easily choose a reference category that presents differences between these two group as large and positive, small and positive, small and negative, large and negative, or negligible. The original analysis (again, black circles) happens to show large and positive differences between the groups.
 
-It is worth highlighting two further features in Figure \ref{fig:bechtel_difference_comparison}. First, the alternative differences-in-AMCEs estimates vary mechanically around the difference in marginal means, as the reference category varies. The difference between marginal means for two groups are always fixed in the data, so the differencing of subgroup AMCEs is merely an exercise is centering those differences at arbitrary points along the range of observed differences in marginal means. Differences-in-AMCEs for a given feature level must therefore necessarily sometimes be positive and sometimes be negative, depending on the reference category used in estimating them. The direction of the difference per se conveys no information about underlying pattern of preferences in the two groups. 
-
-Second, and more practically, because there is no category for which the preferences of the two subgroups in this example are identical, no choice of reference category would have led to inferences from differences-in-AMCEs that accurately reflect the underlying difference in preferences. Even in the 84 Euro per month level, the difference between the two groups is slightly positive. Were there a category for which subgroup preferences were exactly equal, then we could choose that as the reference category and interpret differences-in-AMCEs as differences in preferences. But there is never any guarantee that such a reference category exists. If multiple subgroup analyses are performed, it is unlikely the same reference category would work well across all analyses, making consistent interpretation difficult. And because conjoint analysis generates a sparse feature matrix (where many combinations of feature levels are unobserved in the data), it is rarely possible to empirically select an appropriate set of reference categories using the observed data. It is impossible to know which cell --- of the tens of thousands in the design --- is the best choice of reference. Indeed it is possible that there is no such cell for which preferences are identical in the two groups; such a cell may exist, but there is no reason to expect that it should exist in any given application or that it would happen to be observed. Thus, there is no way to use conditional AMCEs or differences between those conditional AMCEs to convey the underlying similarity or differences in preferences across sample subgroups.
+It is worth highlighting two further features in Figure \ref{fig:bechtel_difference_comparison}. First, the alternative differences-in-AMCEs estimates vary mechanically around the difference in marginal means, as the reference category varies. The difference between marginal means for two groups are always fixed in the data, so the differencing of subgroup AMCEs is merely an exercise is centering those differences at arbitrary points along the range of observed differences in marginal means. Second, and more practically, because there is no category for which the preferences of the two subgroups in this example are identical, no choice of reference category would have led to inferences from differences-in-AMCEs that accurately reflect the underlying difference in preferences. Even in the 84 Euro per month level, the difference between the two groups is slightly positive. Were there a category for which subgroup preferences were exactly equal, then we could choose that as the reference category and interpret differences-in-AMCEs as differences in preferences. But there is never any guarantee that such a reference category exists. Thus, there is no way to use conditional AMCEs or differences between those conditional AMCEs to convey the underlying similarity or differences in preferences across sample subgroups.
 
 
 \section*{Improved Subgroup Analyses in Conjoint Designs}\label{sec:marginalmeans}
 
-Researchers and consumers of conjoints can avoid the inferential errors that accompany conditional AMCEs by focusing attention on (subgroup) marginal means, differences between subgroup marginal means to infer subgroup differences in preferences toward particular features, and omnibus nested model comparisons to infer subgroup differences across many features. To demonstrate each of these three techniques we provide a complete example based upon \citeauthor{HainmuellerHopkinsYamamoto2014}'s analysis of their immigration conjoint by respondent enthnocentrism, which finds that ``the patterns of support are generally similar for respondents irrespective of their level of ethnocentrism'' \citep[22]{HainmuellerHopkinsYamamoto2014}. First, we show how different reference categories could have led to distinctly different conditional AMCEs and, therefore, interpretations of subgroup preference similarity. Second, we show how differences in marginal means clearly convey the similarity of these two subgroups without any sensitivity to reference category. Finally, we show how tested model comparisons would have provided \citeauthor{HainmuellerHopkinsYamamoto2014} with a statistic test of the claimed similarity in levels of support between these two respondent subgroups.
+Researchers and consumers of conjoints interested in describing levels of respondent favorability toward profiles with varying features can avoid the inferential errors that accompany conditional AMCEs by focusing attention on (subgroup) marginal means, differences between subgroup marginal means to infer subgroup differences in preferences toward particular features, and omnibus nested model comparisons to infer subgroup differences across many features. To demonstrate each of these three techniques we provide a complete example based upon \citeauthor{HainmuellerHopkinsYamamoto2014}'s analysis of their immigration conjoint by respondent enthnocentrism, which finds that ``the patterns of support are generally similar for respondents irrespective of their level of ethnocentrism'' \citep[22]{HainmuellerHopkinsYamamoto2014}. First, we show how different reference categories could have led to distinctly different conditional AMCEs and, therefore, interpretations of subgroup preference similarity. Second, we show how differences in marginal means clearly convey the similarity of these two subgroups without any sensitivity to reference category. Finally, we show how tested model comparisons would have provided \citeauthor{HainmuellerHopkinsYamamoto2014} with a statistic test of the claimed similarity in levels of support between these two respondent subgroups.
 
 
 
@@ -235,7 +233,7 @@ Researchers and consumers of conjoints can avoid the inferential errors that acc
 
 \end{knitrout}
 
-To begin, consider the left and right facets of Figure \ref{fig:hainmueller_subgroup_example_plot}, which shows estimated subgroup AMCEs for three features from the immigration study. In panel ``A'' (left), all features are configured so that the reference category is the one with the largest difference in levels of support between the two subgroups. In panel ``B'' (right), all features are configured so that the reference category is the one with the smallest difference in preferences between the two subgroups.
+To begin, consider the left and right facets of Figure \ref{fig:hainmueller_subgroup_example_plot}, which shows estimated subgroup AMCEs for three features from the immigration study. In panel ``A'' (left), all features are configured so that the reference category is the one with the largest difference in levels of support between the two subgroups thus distorting the size of differences at all other levels. In panel ``B'' (right), all features are configured so that the reference category is the one with the smallest difference in preferences between the two subgroups.
 
 Panel A gives the impression that there are significant differences in preferences between high and low ethnocentrism respondents toward immigrants from different countries of origin, with different careers, and with different educational attainments because the reference category choice cascades the difference in reference category favorability into AMCEs for all other feature levels. By contrast, Panel B gives the impression that these differences are negligible. The experimental data and analytic approach in the two portrayals is identical; the only difference is the choice of reference category. Given what we have shown about the relationship between differences in conditional AMCEs and differences in conditional marginal means, Panel B is the more truthful visualization \citep{Cairo2016}. The differences between subgroup AMCEs there more accurately convey differences in underlying preferences because the reference categories used in Panel B are the most similar between the two groups.
 
@@ -276,21 +274,19 @@ F = \dfrac{\dfrac{SSR_{Restricted} - SSR_{Unrestricted}}{r}}{\dfrac{SSR_{Unrestr
 
 
 
-For the \citeauthor{HainmuellerHopkinsYamamoto2014} language feature, the resulting F-test for the model comparison in this case again gives us little reason to believe there are subgroup differences: F(4, 11496)=1.06, $p\leq0.37$. We could repeat such pairwise comparisons or omnibus comparisons for each feature in the design.
+For the education feature, the resulting F-test for the model comparison in this case again gives us little reason to believe there are subgroup differences: F(7, 11493)=0.68, $p\leq0.69$. We could repeat such pairwise comparisons or omnibus comparisons for each feature in the design --- for country of origin (F(10, 11490)=1.56, $p\leq0.11$) or job (F(11, 11489)=0.87, $p\leq0.56$) --- or for all features as a whole (F(98, 11402)=1.16, $p\leq0.14$).
 
-Furthermore, we could also directly visualize differences in conditional marginal means for this feature --- and all features --- as in Figure \ref{fig:hainmueller_mm_diffs}. This provides a more direct presentation of \textit{differences} between subgroup preferences as the vertical line indicates feature levels for which there is no difference between the two groups. Positive values to the right of the line indicate positive differences (high ethnocentrism respondents are more favorable toward immigrants with this feature than low ethnocentrism respondents) and negative value to the left of zero convey the opposite. A further advantage of this plot is that unlike displays of conditional AMCEs, differences in conditional marginal means communicate subgroup differences for all feature levels including the reference categories. This display makes readily clear what was only indirectly apparent in Figure \ref{fig:hainmueller_mm_diffs}: there are indeed no sizeable and only a few statistically apparent differences in preferences between the two groups.
-
-
+This visual display in Figure \ref{fig:hainmueller_mm_diffs} and these statistical tests make clear what could not be directly inferred from conditional AMCEs alone: there are indeed no sizeable and only a few statistically apparent differences in preferences between the two groups.
 
 
 
-As before, we can perform an omnibus tests for the presence of any subgroup differences across all features, again using nested model comparison of two equations: (a) one estimating only effects of the features, and (b) the same model with additional interactions between the subgrouping covariate and all features. The result of that test for differences by ethnocentrism from the immigration experiment is: F(98, 11402)=1.16, $p\leq0.14$, which further demonstrates that the substantive interpretation provided by \citet{HainmuellerHopkinsYamamoto2014} accurately identified a lack of between-group differences.
-
-This kind of nested model comparison test can also be used to assess heterogeneity across conjoint features \citep[see also][]{EgamiImai2018}. For example, \citet{TeeleKallaRosenbluth2018} report just such a test for how effects of features other than candidate sex may differ between male and female candidates, finding no such heterogeneity (8--9). Fortunately, the original analysis accurately detected an absence of subgroup differences, yet a subtly different set of analytic decisions about reference categories (as shown in Figure \ref{fig:hainmueller_subgroup_example_plot}) could have led to a quite different conclusion. As an example, \citet{BechtelScheve2013} argue that their conjoint results show ``individuals in all four countries largely agree on which dimensions are important and to what extent'' \citep[13765]{BechtelScheve2013}, but a nested model comparison shows the countries do differ in their preferences F(54, 67982)=3.72, $p\leq0.00$. This cross-country variation largely driven by differences in sensitivity to monthly household costs feature, F(15, 67995)=3.80, $p\leq0.00$, with the United Kingdom and United States being more cost sensitive than Germany and France. Visual comparisons of conditional AMCEs can sometimes provide accurate insights into subgroup differences in preferences, but ulimately there is no guarantee that they do in any particular analysis.
+This kind of nested model comparison test can also be used to assess heterogeneity across conjoint features \citep[see also][]{EgamiImai2018}. For example, \citet{TeeleKallaRosenbluth2018} report just such a test for how effects of features other than candidate sex may differ between male and female candidates, finding no such heterogeneity (8--9). Fortunately, the original analysis accurately detected an absence of subgroup differences, yet a subtly different set of analytic decisions about reference categories (as shown in Figure \ref{fig:hainmueller_subgroup_example_plot}) could have led to quite different inferences. As an example, \citet{BechtelScheve2013} argue that their conjoint results show ``individuals in all four countries [Germany, France, United States, United Kingdom] largely agree on which dimensions are important and to what extent'' \citep[13765]{BechtelScheve2013}, but a nested model comparison shows the countries do differ in their preferences F(54, 67982)=3.72, $p\leq0.00$. This cross-country variation is largely driven by differences in sensitivity to monthly household costs feature, F(15, 67995)=3.80, $p\leq0.00$, with the United Kingdom and United States being more cost sensitive than Germany and France. Visual comparisons of conditional AMCEs can sometimes provide accurate insights into subgroup differences in preferences (as in the \citeauthor{HainmuellerHopkinsYamamoto2014} case), but ulimately there is no guarantee that they do in any particular analysis.
 
 \section*{Conclusion}\label{sec:conclusion}
 
-This article has identified several challenges related to the analysis and reporting of conjoint experimental designs, particularly analyses of subgroup differences. We suggest that conjoint analyses should report not only average marginal component effects (AMCEs) but also descriptive quantities that better convey underlying preferences over profile features and better convey subgroup differences in those preferences. Marginal means contain all of the information provided by AMCEs and more. Consequently, our intention here is not to substantively undermine any previous set of results, but instead to urge researchers moving forward to demonstrate considerable caution in how they design, analyze, and present the results of these types of descriptive experiments. We have relatively straightforward and hopefully uncontroversial advice for how analysts of conjoint experiments should proceed:
+This article has identified several challenges related to the analysis and reporting of conjoint experimental designs, particularly analyses of subgroup differences. We suggest that conjoint analyses should report not only average marginal component effects (AMCEs) but also descriptive quantities about levels of favorability that better convey underlying preferences over profile features and better convey subgroup differences in those preferences. Marginal means contain all of the information provided by AMCEs and more. Consequently, our intention here is not to substantively undermine any previous set of results, but instead to urge researchers moving forward to demonstrate considerable caution in how they design, analyze, and present the results of these types of descriptive experiments and how they test for differences in preferences between subgroups.
+
+We have relatively straightforward and hopefully uncontroversial advice for how analysts of conjoint experiments should proceed:
 
 \begin{enumerate}
 \item Always report unadjusted marginal means when attempting to provide a \textit{descriptive} summary of respondent preferences in addition to, or instead of, AMCEs.\footnote{Like the presentation of AMCEs, displaying marginal means in constrained conjoint designs may also distort apparent patterns given that not all features can co-occur. Partitioning the design into fractions such that each fraction contains a fully unconstrained design would mitigate any concern with that presentation.}
@@ -304,9 +300,9 @@ This article has identified several challenges related to the analysis and repor
 
 \noindent Following this advice, we hope, will allow researchers to more clearly and more accurately represent descriptive results of conjoint experiments.
 
-The popularity of conjoint analyses in recent years highlights the power of the design and the important contributions made by \citet{HainmuellerHopkinsYamamoto2014} in providing a novel causal interpretation of these fully randomized factorial designs. Yet with new tools always come new challenges. The now-common practice of descriptively interpreting conjoints requires more caution than is immediately obvious. This paper has demonstrated several such challenges and hopefully provides useful advice for how researchers should proceed with the analysis of such designs.
+The popularity of conjoint analyses in recent years highlights the power of the design and the important contributions made by \citet{HainmuellerHopkinsYamamoto2014} in providing a novel causal interpretation of these fully randomized factorial designs. Yet with new tools always come new challenges. The now-common practice of descriptively interpreting conjoints requires more caution than is immediately obvious. 
 
-To facilitate such analysis and, especially, to provide easy-to-use tools for calculating marginal means and performing reference category selection diagnostics, we provide software called \textbf{cregg} \citep{Leeper2018cregg} available from the Comprehensive R Archive Network; this manuscript is written as a reproducible knitr document \citep{Xie2015} that contains complete code examples that will perform all analyses and visualization used throughout this article. With that resource in-hand, researchers should be well-equipped to analyze conjoint designs without running into the analytic challenges discussed here.
+To facilitate improved analysis and, especially, to provide easy-to-use tools for calculating marginal means and performing reference category selection diagnostics, we provide software called \textbf{cregg} \citep{Leeper2018cregg} available from the Comprehensive R Archive Network. Additionally, this manuscript is written as a reproducible knitr document \citep{Xie2015} that contains complete code examples that will perform all analyses and visualization used throughout this article. With these resources in-hand, researchers should be well-equipped to analyze subgroup preferences in conjoint designs without running into the analytic challenges discussed here.
 
 
 
@@ -567,23 +563,11 @@ Military Service & Did Not Serve & 0.46 & 0.01 & -3.54 \\
 
 \section{Hainmueller et al. (2014) Immigration Experiment}\label{app:hainmuellerimmigration}
 
-\subsection{Replication using AMCEs and MMs}
+\subsection{Replication using AMCEs}
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/hainmueller_immigration_amce_appendix-1} 
-
-\includegraphics[width=\maxwidth]{figure/hainmueller_immigration_amce_appendix-2} 
-
-\end{knitrout}
-
-\clearpage
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-\includegraphics[width=\maxwidth]{figure/hainmueller_immigration_amce_appendix_split-1} 
-
-\includegraphics[width=\maxwidth]{figure/hainmueller_immigration_amce_appendix_split-2} 
 
 \end{knitrout}
 
@@ -656,6 +640,17 @@ Gender & female & 0.00 &  &  \\
 \end{table}
 
 
+
+\clearpage
+
+\subsection{Replication using MMs}
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\includegraphics[width=\maxwidth]{figure/hainmueller_immigration_mm_appendix-1} 
+
+\end{knitrout}
 
 \clearpage
 
@@ -950,15 +945,15 @@ Candidate Sex & Male & 0.48 & 0.01 & -3.22 \\
 
 \end{knitrout}
 
-\clearpage
+%\clearpage
 
-\subsection{Numerical Results: AMCEs}
+%\subsection{Numerical Results: AMCEs}
 
 
 
-\clearpage
+%\clearpage
 
-\subsection{Numerical Results: MMs}
+%\subsection{Numerical Results: MMs}
 
 
 
@@ -973,7 +968,7 @@ Candidate Sex & Male & 0.48 & 0.01 & -3.22 \\
 
 \end{knitrout}
 
-\clearpage
+%\clearpage
 
 
 
@@ -987,7 +982,7 @@ Candidate Sex & Male & 0.48 & 0.01 & -3.22 \\
 
 \end{knitrout}
 
-\clearpage
+%\clearpage
 
 
 
@@ -1003,15 +998,13 @@ Candidate Sex & Male & 0.48 & 0.01 & -3.22 \\
 
 \clearpage
 
-\clearpage
+\subsection{Subgroup Analysis using MMs: Environmentalism}
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
 \includegraphics[width=\maxwidth]{figure/bechtel_subgroup_mm_environmentalism-1} 
 
 \end{knitrout}
-
-\clearpage
 
 \clearpage
 
@@ -1025,8 +1018,6 @@ Candidate Sex & Male & 0.48 & 0.01 & -3.22 \\
 
 \clearpage
 
-\clearpage
-
 \subsection{Subgroup Analysis using MMs: Reciprocity}
 
 \begin{knitrout}
@@ -1034,8 +1025,6 @@ Candidate Sex & Male & 0.48 & 0.01 & -3.22 \\
 \includegraphics[width=\maxwidth]{figure/bechtel_subgroup_mm_reciprocity-1} 
 
 \end{knitrout}
-
-\clearpage
 
 \clearpage
 
