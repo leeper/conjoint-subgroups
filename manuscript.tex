@@ -227,7 +227,7 @@ Researchers and consumers of conjoints interested in describing levels of respon
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
-\includegraphics[width=\maxwidth]{figure/hainmueller_subgroup_example_plot-1} \caption[Comparison of AMCEs for Low- and High-Ethnocentrism Respondents Using Two Alternative Reference Categories Choices for Hainmueller et al]{Comparison of AMCEs for Low- and High-Ethnocentrism Respondents Using Two Alternative Reference Categories Choices for Hainmueller et al. (2014) Immigration Experiment}\label{fig:hainmueller_subgroup_example_plot}
+\includegraphics[width=\maxwidth]{figure/hainmueller_subgroup_example_plot-1} \caption[Comparison of AMCEs for Low- and High-Ethnocentrism Respondents Using Two Alternative Reference Categories Choices for Three Features from Hainmueller et al.'s (2014) Immigration Experiment]{Comparison of AMCEs for Low- and High-Ethnocentrism Respondents Using Two Alternative Reference Categories Choices for Three Features from Hainmueller et al.'s (2014) Immigration Experiment}\label{fig:hainmueller_subgroup_example_plot}
 \end{figure}
 
 
@@ -239,7 +239,7 @@ Panel A gives the impression that there are significant differences in preferenc
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
-\includegraphics[width=\maxwidth]{figure/hainmueller_mm_diffs-1} \caption[Differences in Conditional Marginal Means, by Ethnocentrism, for Hainmueller et al.'s (2014) Immigration Experiment]{Differences in Conditional Marginal Means, by Ethnocentrism, for Hainmueller et al.'s (2014) Immigration Experiment}\label{fig:hainmueller_mm_diffs}
+\includegraphics[width=\maxwidth]{figure/hainmueller_mm_diffs-1} \caption[Differences in Conditional Marginal Means, by Ethnocentrism, for Three Features From Hainmueller et al.'s (2014) Immigration Experiment]{Differences in Conditional Marginal Means, by Ethnocentrism, for Three Features From Hainmueller et al.'s (2014) Immigration Experiment}\label{fig:hainmueller_mm_diffs}
 \end{figure}
 
 
@@ -247,20 +247,20 @@ Panel A gives the impression that there are significant differences in preferenc
 
 Next, making a comparison of levels of favorability toward different types of immigrants without using AMCEs would have been even more truthful. Figure \ref{fig:hainmueller_mm_diffs} \textit{directly} shows that comparison of preferences as differences in subgroup marginal means between the two groups for these three features, with 95\% confidence intervals for the difference.\footnote{A presentation of subgroup marginal means for all features can be found in Appendix \ref{app:hainmuellerimmigration}.} The two groups indeed have similar preferences, something that would have happened to be clear had the conditional AMCEs in the right panel of Figure \ref{fig:hainmueller_subgroup_example_plot} been presented but that would have been far less obvious were the conditional AMCEs in the left panel of that figure presented. Pairwise difference in means tests would provide formal procedures for testing the statistical significance of these differences.
 
-Yet, finally, the similarity of subgroup preferences in conjoints is often characterized in an \textit{omnibus} fashion, as in the quote from \citet{HainmuellerHopkinsYamamoto2014} describing ``patterns of support.'' An appropriate test in such cases is one that evaluates whether a model of support that accounts for group differences better fits the data than a model of support with only conjoint features as predictors. This type of test is known as a ``nested model comparison'' which compares the fit of a ``restricted'' regression (the restriction being that interactions between features and a subgroup identifier are held to be zero) nested within an ``unrestricted'' regression that allows for arbitrary interactions between conjoint features and the subgroup identifier. Formally, a nested model comparison provides an F-test of the null hypothesis that all interaction terms are equal to zero.\footnote{Like any ANOVA this hypothesis test may yield substantively different insight from a series of tests of pairwise mean differences. Figure \ref{fig:hainmueller_mm_diffs} shows three instances where the confidence intervals for pairwise differences in marginal means do not include zero even though the omnibus test fails to reject the null.}
+Yet, finally, the similarity of subgroup preferences in conjoints is often characterized in an \textit{omnibus} fashion, as in the quote from \citet{HainmuellerHopkinsYamamoto2014} describing ``patterns of support.'' An appropriate test in such cases is one that evaluates whether a model of support that accounts for group differences better fits the data than a model of support with only conjoint features as predictors. This type of test is known as a ``nested model comparison'' which compares the fit of a ``restricted'' regression (the restriction being that interactions between features and a subgroup identifier are held to be zero) nested within an ``unrestricted'' regression that allows for arbitrary interactions between conjoint features and the subgroup identifier. Formally, a nested model comparison provides an F-test of the null hypothesis that all interaction terms are equal to zero.\footnote{Like any ANOVA this hypothesis test may yield substantively different insight from a series of tests of pairwise mean differences. Figure \ref{fig:hainmueller_mm_diffs} shows three instances where the 95\% confidence intervals for pairwise differences in marginal means do not include zero even though the omnibus test fails to reject the null at $\alpha = 0.05$.}
 
 To make this concrete, for a feature with four levels (one treated as a reference category), the first (restricted) equation would be:
 
 \begin{equation}\label{eq:restricted}
-Y = \beta_0 + \beta_1 Level_1 + \beta_2 Level_2 + \beta_3 Level_3 + u
+Y = \beta_0 + \beta_1 Level_2 + \beta_2 Level_3 + \beta_3 Level_4 + u
 \end{equation}
 
 \noindent The second (unrestricted) equation would allow for interactions between feature levels and the subgroup identifier:
 
 \begin{equation}\label{eq:unrestricted}
 \begin{split}
-Y = & \beta_0 + \beta_1 Level_1 + \beta_2 Level_2 + \beta_3 Level_3 + \beta_4 Group + \\
-& \beta_5 Level_1 * Group + \beta_6 Level_2 * Group + \beta_7 Level_3 * Group + u
+Y = & \beta_0 + \beta_1 Level_2 + \beta_2 Level_3 + \beta_3 Level_4 + \beta_4 Group + \\
+& \beta_5 Level_2 * Group + \beta_6 Level_3 * Group + \beta_7 Level_4 * Group + u
 \end{split}
 \end{equation}
 
@@ -280,7 +280,7 @@ This visual display in Figure \ref{fig:hainmueller_mm_diffs} and these statistic
 
 
 
-This kind of nested model comparison test can also be used to assess heterogeneity across conjoint features \citep[see also][]{EgamiImai2018}. For example, \citet{TeeleKallaRosenbluth2018} report just such a test for how effects of features other than candidate sex may differ between male and female candidates, finding no such heterogeneity (8--9). Fortunately, the original analysis accurately detected an absence of subgroup differences, yet a subtly different set of analytic decisions about reference categories (as shown in Figure \ref{fig:hainmueller_subgroup_example_plot}) could have led to quite different inferences. As an example, \citet{BechtelScheve2013} argue that their conjoint results show ``individuals in all four countries [Germany, France, United States, United Kingdom] largely agree on which dimensions are important and to what extent'' \citep[13765]{BechtelScheve2013}, but a nested model comparison shows the countries do differ in their preferences F(54, 67982)=3.72, $p\leq0.00$. This cross-country variation is largely driven by differences in sensitivity to monthly household costs feature, F(15, 67995)=3.80, $p\leq0.00$, with the United Kingdom and United States being more cost sensitive than Germany and France. Visual comparisons of conditional AMCEs can sometimes provide accurate insights into subgroup differences in preferences (as in the \citeauthor{HainmuellerHopkinsYamamoto2014} case), but ulimately there is no guarantee that they do in any particular analysis.
+This kind of nested model comparison test can also be used to assess heterogeneity across conjoint features \citep[see also][]{EgamiImai2018}. For example, \citet{TeeleKallaRosenbluth2018} report just such a test for how effects of features other than candidate sex may differ between male and female candidates, finding no such heterogeneity (8--9). Fortunately, the original analysis accurately detected an absence of subgroup differences, yet a subtly different set of analytic decisions about reference categories (as shown in Figure \ref{fig:hainmueller_subgroup_example_plot}) could have led to quite different inferences. As an example, \citet{BechtelScheve2013} argue that their conjoint results show ``individuals in all four countries [Germany, France, United States, United Kingdom] largely agree on which dimensions are important and to what extent'' \citep[13765]{BechtelScheve2013}, but a nested model comparison shows the countries do differ in their preferences F(54, 67982)=3.72, $p\leq0.00$. This cross-country variation is largely driven by differences in sensitivity to monthly household costs feature, F(15, 67995)=3.80, $p\leq0.00$, with the United Kingdom and United States being more cost sensitive than Germany and France. Visual comparisons of conditional AMCEs can sometimes provide accurate insights into subgroup differences in preferences (as in the \citeauthor{HainmuellerHopkinsYamamoto2014} case), but ultimately there is no guarantee that they do in any particular analysis.
 
 \section*{Conclusion}\label{sec:conclusion}
 
@@ -289,20 +289,18 @@ This article has identified several challenges related to the analysis and repor
 We have relatively straightforward and hopefully uncontroversial advice for how analysts of conjoint experiments should proceed:
 
 \begin{enumerate}
-\item Always report unadjusted marginal means when attempting to provide a \textit{descriptive} summary of respondent preferences in addition to, or instead of, AMCEs.\footnote{Like the presentation of AMCEs, displaying marginal means in constrained conjoint designs may also distort apparent patterns given that not all features can co-occur. Partitioning the design into fractions such that each fraction contains a fully unconstrained design would mitigate any concern with that presentation.}
+\item Always report unadjusted marginal means when attempting to provide a \textit{descriptive} summary of respondent preferences in addition to, or instead of, AMCEs.%\footnote{Like the presentation of AMCEs, displaying marginal means in constrained conjoint designs may also distort apparent patterns given that not all features can co-occur. Partitioning the design into fractions such that each fraction contains a fully unconstrained design would mitigate any concern with that presentation.}
 
-\item Exercise caution when explicitly, or implicitly, interpreting differences-in-AMCEs across subgroups. Differences-in-AMCEs are differences in effect sizes for subgroups, not statments about the relative favorability of the subgroups toward profiles with a given feature. Heterogeneous effects do not necessarily mean different underlying preferences. If differences in AMCEs are reported, the choice of reference categories should be discussed explicitly and diagnostics should be provided to justify it.
+\item Exercise caution when explicitly, or implicitly, interpreting differences-in-AMCEs across subgroups. Differences-in-AMCEs are differences in effect sizes for subgroups, not statements about the relative favorability of the subgroups toward profiles with a given feature. Heterogeneous effects do not necessarily mean different underlying preferences. If differences in AMCEs are reported, the choice of reference categories should be discussed explicitly and diagnostics should be provided to justify it.
 
 \item When descriptively characterizing differences in preference level between subgroups, directly estimate the subgroup difference using conditional marginal means and differences between conditional marginal means, rather than relying on the difference-in-AMCEs.
 
-\item To formally test for group differences in preferences, regression with interaction terms between the subgrouping covariate and all feature levels will generate estimates of level-specific differences in preferences via the coefficients on the interaction terms.\footnote{The analysis is slightly more complicated in constrained designs.} A nested model comparison between this equation against one without such interactions provides an omnibus test of subgroup differences, which should be reported when characterizing overall patterns of subgroup differences.
+\item To formally test for group differences in preferences, regression with interaction terms between the subgrouping covariate and all feature levels will generate estimates of level-specific differences in preferences via the coefficients on the interaction terms. A nested model comparison between this equation against one without such interactions provides an omnibus test of subgroup differences, which should be reported when characterizing overall patterns of subgroup differences.
 \end{enumerate}
 
 \noindent Following this advice, we hope, will allow researchers to more clearly and more accurately represent descriptive results of conjoint experiments.
 
-The popularity of conjoint analyses in recent years highlights the power of the design and the important contributions made by \citet{HainmuellerHopkinsYamamoto2014} in providing a novel causal interpretation of these fully randomized factorial designs. Yet with new tools always come new challenges. The now-common practice of descriptively interpreting conjoints requires more caution than is immediately obvious. 
-
-To facilitate improved analysis and, especially, to provide easy-to-use tools for calculating marginal means and performing reference category selection diagnostics, we provide software called \textbf{cregg} \citep{Leeper2018cregg} available from the Comprehensive R Archive Network. Additionally, this manuscript is written as a reproducible knitr document \citep{Xie2015} that contains complete code examples that will perform all analyses and visualization used throughout this article. With these resources in-hand, researchers should be well-equipped to analyze subgroup preferences in conjoint designs without running into the analytic challenges discussed here.
+The popularity of conjoint analyses in recent years highlights the power of the design and the important contributions made by \citet{HainmuellerHopkinsYamamoto2014} in providing a novel causal interpretation of these fully randomized factorial designs. Yet with new tools always come new challenges. The now-common practice of descriptively interpreting conjoints requires more caution than is immediately obvious. To facilitate improved analysis and, especially, to provide easy-to-use tools for calculating marginal means and performing reference category selection diagnostics, we provide software called \textbf{cregg} \citep{Leeper2018cregg} available from the Comprehensive R Archive Network. Additionally, this manuscript is written as a reproducible knitr document \citep{Xie2015} that contains complete code examples that will perform all analyses and visualization used throughout this article. With these resources in-hand, researchers should be well-equipped to analyze subgroup preferences in conjoint designs without running into the analytic challenges discussed here.
 
 
 
@@ -446,7 +444,7 @@ In \textit{constrained} conjoint designs, the choice of reference category is ev
 \subsection{Numerical Results: AMCEs}
 
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Sun Apr 14 20:35:25 2019
+% Tue Apr 16 22:40:04 2019
 \begin{table}[ht]
 \centering
 \begingroup\footnotesize
@@ -505,7 +503,7 @@ Military Service & Did Not Serve & 0.00 &  &  \\
 \subsection{Numerical Results: MMs}
 
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Sun Apr 14 20:35:25 2019
+% Tue Apr 16 22:40:05 2019
 \begin{table}[ht]
 \centering
 \begingroup\footnotesize
@@ -576,7 +574,7 @@ Military Service & Did Not Serve & 0.46 & 0.01 & -3.54 \\
 \subsection{Numerical Results: AMCEs}
 
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Sun Apr 14 20:35:34 2019
+% Tue Apr 16 22:40:09 2019
 \begin{table}[ht]
 \centering
 \begingroup\scriptsize
@@ -657,7 +655,7 @@ Gender & female & 0.00 &  &  \\
 \subsection{Numerical Results: MMs}
 
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Sun Apr 14 20:35:37 2019
+% Tue Apr 16 22:40:15 2019
 \begin{table}[ht]
 \centering
 \begingroup\scriptsize
@@ -787,7 +785,7 @@ Gender & female & 0.51 & 0.01 & 1.99 \\
 \subsection{Numerical Results: AMCEs}
 
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Sun Apr 14 20:35:47 2019
+% Tue Apr 16 22:40:25 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{lp{1.5in}rrr}
@@ -823,7 +821,7 @@ Candidate Sex & Male & 0.00 &  &  \\
 \subsection{Numerical Results: MMs}
 
 % latex table generated in R 3.5.3 by xtable 1.8-3 package
-% Sun Apr 14 20:35:48 2019
+% Tue Apr 16 22:40:27 2019
 \begin{table}[ht]
 \centering
 \begin{tabular}{lp{1.5in}rrr}
@@ -1149,11 +1147,13 @@ Candidate Sex & Male & 0.48 & 0.01 & -3.22 \\
 ## [22] withr_2.1.2       stringr_1.4.0     knitr_1.22       
 ## [25] hms_0.4.2         lmtest_0.9-36     grid_3.5.3       
 ## [28] data.table_1.12.2 R6_2.4.0          survival_2.44-1.1
-## [31] readxl_1.3.1      foreign_0.8-71    magrittr_1.5     
-## [34] splines_3.5.3     scales_1.0.0      assertthat_0.2.1 
-## [37] xtable_1.8-3      colorspace_1.4-1  sandwich_2.5-1   
-## [40] survey_3.35-1     stringi_1.4.3     lazyeval_0.2.2   
-## [43] munsell_0.5.0     crayon_1.3.4      zoo_1.8-5
+## [31] readxl_1.3.1      foreign_0.8-71    reshape2_1.4.3   
+## [34] readr_1.3.1       magrittr_1.5      codetools_0.2-16 
+## [37] splines_3.5.3     scales_1.0.0      assertthat_0.2.1 
+## [40] xtable_1.8-3      colorspace_1.4-1  labeling_0.3     
+## [43] sandwich_2.5-1    survey_3.35-1     stringi_1.4.3    
+## [46] lazyeval_0.2.2    munsell_0.5.0     crayon_1.3.4     
+## [49] zoo_1.8-5
 \end{verbatim}
 \end{kframe}
 \end{knitrout}
