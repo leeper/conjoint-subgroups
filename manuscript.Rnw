@@ -2,7 +2,6 @@
 \usepackage[margin=1in]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage{mathpazo}
-%\usepackage{times}
 \usepackage{booktabs}
 \usepackage{multirow}
 \usepackage{natbib}
@@ -12,10 +11,11 @@
 \usepackage{sectsty}
 \subsectionfont{\normalfont\large\underline}
 \usepackage{floatrow}
+\usepackage[hidelinks]{hyperref}
 \floatsetup[figure]{capposition=top}
 \floatsetup[table]{capposition=top}
 
-\title{Measuring Subgroup Preferences in Conjoint Experiments%\footnote{We thank Benjamin Lauderdale, Jamie Druckman, Yusaku Horiuchi, the editor, and anonymous reviewers for feedback on this manuscript.}
+\title{Measuring Subgroup Preferences in Conjoint Experiments\footnote{We thank Benjamin Lauderdale, Jamie Druckman, Yusaku Horiuchi, the editor, and anonymous reviewers for feedback on this manuscript. Replication data and code for this article are available from the \textit{Political Analysis} Dataverse: \url{https://doi.org/10.7910/DVN/ARHZU4}. This work was funded, in part, by the United Kingdom Economic and Social Research Council (Grant ES/R000573/1).}
 }
 \author{Thomas J. Leeper, Sara B. Hobolt, and James Tilley}
 
@@ -26,13 +26,15 @@
 {\abstract Conjoint analysis is a common tool for studying political preferences. The method disentangles patterns in respondents' favorability toward complex, multidimensional objects, such as candidates or policies. Most conjoints rely upon a fully randomized design to generate average marginal component effects (AMCEs). These measure the degree to which a given value of a conjoint profile feature increases, or decreases, respondents' support for the overall profile relative to a baseline, averaging across all respondents and other features. While the AMCE has a clear causal interpretation (about the \textit{effect} of features), most published conjoint analyses also use AMCEs to describe \textit{levels} of favorability. This often means comparing AMCEs among respondent subgroups. We show that using conditional AMCEs to describe the degree of subgroup agreement can be misleading as regression interactions are sensitive to the reference category used in the analysis. This leads to inferences about subgroup differences in preferences that have arbitrary sign, size, and significance. We demonstrate the problem using examples drawn from published articles and provide suggestions for improved reporting and interpretation using marginal means and an omnibus F-test. Given the accelerating use of these designs in political science, we offer advice for best practice in analysis and presentation of results.}
 
 
-<<hidden, eval=FALSE, echo=FALSE, results="hide">>=
-# setwd("c:/users/thomas/dropbox/brexit identity/papers/subgroupanalysis")
-# knitr::knit2pdf("manuscript.Rnw", quiet = TRUE)
-@
-
 <<knitr_options, cache=FALSE, echo=FALSE, results="hide">>=
-knitr::opts_chunk$set(cache = TRUE, echo=FALSE, results="hold", warning=FALSE, error=FALSE, message=FALSE)
+knitr::opts_chunk$set(
+  cache = TRUE,
+  echo=FALSE,
+  results="hold",
+  warning=FALSE,
+  error=FALSE,
+  message=FALSE
+)
 options(scipen = 10)
 @
 
@@ -296,7 +298,7 @@ What is not necessarily obvious in such analyses is that differences-in-preferen
 
 As we will show, where preferences in subgroups toward the experimental reference category are similar, the difference-in-AMCEs conveys preferences reasonably well. The problem occurs when preferences between subgroups diverge in the reference category. Here, the difference-in-AMCEs is a misleading representation of underlying patterns of favorability. Given most published conjoint studies report results based upon reference categories chosen for \textit{substantive} reasons about the nature or meaning of the levels rather than the configuration of preferences revealed in the experiment, difference-in-AMCEs should not be assumed to be interpretable as differences in subgroup preferences. The root of this error is likely familiar to many researchers: it is simply a matter of regression specification for models involving interactions between categorical regressors. \citet{EgamiImai2018}, for example, provide an extensive discussion of the implications of this property for interpreting causal interactions between randomized features of conjoint profiles. The state of the published literature would suggest the problem remains non-obvious when applied to descriptive analysis of subgroups in conjoint designs.\footnote{Since this manuscript has been under review, we have been made aware of one working paper by \citet{ClaytonFerwerdaHoriuchi2018}, on the topic of immigration preferences, that correctly notes the need to address the arbitrary reference category in order to compare subgroup preferences.}
 
-In what follows, we demonstrate the challenges of conjoint analysis and remind readers of how reference category choice for profile features creates problems for comparing conditional AMCEs across respondent subgroups. We show how the use of an arbitrary reference category means the size, direction, and statistical significance of differences-in-AMCEs have little relationship to the underlying degree of favorability of the subgroups toward profiles with particular features. Reference category choices can make similar preferences look dissimilar and dissimilar preferences look similar. We demonstrate this with examples drawn from the published political science literature (namely experiments by \citealt{HainmuellerHopkinsYamamoto2014, BechtelScheve2013, TeeleKallaRosenbluth2018}). The paper then provides suggestions for improved conjoint reporting and interpretation based around two quantities of interest drawn from the factorial experimentation literature: (a) unadjusted marginal means, a quantity measuring favorability toward a given feature, and (b) an omnibus F-test, measuring differences therein. Software for the R programming language to support our findings --- and that can be used to examine sensitivity of conjoint analysis to reference category selection, calculate AMCEs and marginal means, perform subgroup analyses, and test for subgroup differences in any conjoint experiment --- is demonstrated throughout. We conclude with advice for best practices in the analysis and presentation of conjoint results.
+In what follows, we demonstrate the challenges of conjoint analysis and remind readers of how reference category choice for profile features creates problems for comparing conditional AMCEs across respondent subgroups. We show how the use of an arbitrary reference category means the size, direction, and statistical significance of differences-in-AMCEs have little relationship to the underlying degree of favorability of the subgroups toward profiles with particular features. Reference category choices can make similar preferences look dissimilar and dissimilar preferences look similar. We demonstrate this with examples drawn from the published political science literature (namely experiments by \citealt{HainmuellerHopkinsYamamoto2014, BechtelScheve2013, TeeleKallaRosenbluth2018}). The paper then provides suggestions for improved conjoint reporting and interpretation based around two quantities of interest drawn from the factorial experimentation literature: (a) unadjusted marginal means, a quantity measuring favorability toward a given feature, and (b) an omnibus F-test, measuring differences therein. Software for the R programming language to support our findings --- and that can be used to examine sensitivity of conjoint analysis to reference category selection, calculate AMCEs and marginal means, perform subgroup analyses, and test for subgroup differences in any conjoint experiment \citep{Leeper2018cregg} --- is demonstrated throughout using example data \citep{LeeperHoboltTilley2019}. We conclude with advice for best practices in the analysis and presentation of conjoint results.
 
 
 \section*{Quantities of Interest in Conjoint Experiments}\label{sec:quantities}
@@ -418,7 +420,7 @@ This additional information matters. Consider again the simple two-condition exp
 
 \noindent The effect of $x$ when $z=0$ is given by $\beta_1$. The effect of $x$ when $z=1$ is given by $\beta_3$. These are, in essence, the conditional AMCEs in a conjoint analysis. Yet the difference in AMCEs ($\beta_3 - \beta_1$) is not equal to the difference in preferences between the two groups, which is $\bar{y}_{z=1|x=1} - \bar{y}_{z=0|x=1}$ (estimated by $(\beta_2 + \beta_3) - (\beta_0 + \beta_1)$). The difference-in-AMCEs only equals the difference in preferences when $\beta_2 \equiv \beta_0$. Yet the standard AMCE-centric conjoint analysis does not present absolute favorability in the reference category. Similarity of conditional AMCEs only means similarity of the \textit{causal effect} of the feature across groups, not similarity of \textit{preferences} unless preferences toward profiles with the reference category are equivalent in both groups. Given the reference category choice is typically arbitrary or driven by substantive knowledge of the levels, there is never any reason to expect that the reference category satisfies this equality requirement. When using a difference-in-AMCEs comparison to estimate a difference in preferences, the size and direction of the bias is determined by the size of the difference in preferences toward the reference category within each subgroup.
 
-<<tkr_replication, dependson=c("data_tkr"), fig.height=4.5, fig.width=5, fig.cap="Replication of Results for `Candidate Sex' Feature from Teele et al. (2018) Candidate Experiment using Full Sample and Subgroup AMCEs and MMs", fig.show="hold", message=FALSE>>=
+<<tkr_replication, dependson=c("data_tkr"), fig.height=4.5, fig.width=5, fig.cap="Replication of Results for `Candidate Sex' Feature from Teele et al. (2018) Candidate Experiment using Full Sample AMCEs and MMs and Subgroup AMCEs and MMs for Democrats and Republicans", fig.show="hold", message=FALSE>>=
 a <- plot(
   subset(cj(
    tkr, 
@@ -465,8 +467,8 @@ c <- plot(
   ), feature == "Candidate Sex"), 
   xlab = NULL, feature_headers = FALSE, vline = 0, group = "PartyID", xlim = c(-0.11, 0.11), size = 2
 ) + 
- annotate("text", y = 1.65, x = -0.04, label = "Republicans", size = 3) + 
- annotate("text", y = 1.3, x = 0.05, label = "Democrats", size = 3) + 
+ annotate("text", y = 1.7, x = -0.04, label = "Republicans", size = 3) + 
+ annotate("text", y = 1.35, x = 0.05, label = "Democrats", size = 3) + 
  ggtitle(NULL, "Subgroup AMCEs") + 
  scale_colour_manual(values=rep("black", 2)) +
  aes(shape = PartyID) + 
@@ -488,6 +490,10 @@ d <- plot(
   ), feature == "Candidate Sex"),
   xlab = NULL, feature_headers = FALSE, vline = 0.5, group = "PartyID", xlim = c(0.39,0.61), size = 2
 ) + 
+ annotate("text", y = 1.8, x = 0.48, label = "Rep.", size = 3) + 
+ annotate("text", y = 0.8, x = 0.52, label = "Rep.", size = 3) + 
+ annotate("text", y = 2.2, x = 0.55, label = "Dem.", size = 3) + 
+ annotate("text", y = 1.2, x = 0.45, label = "Dem.", size = 3) + 
  ggtitle(NULL, "Subgroup MMs") + 
  scale_colour_manual(values=rep("black", 2)) +
  aes(shape = PartyID) + 
@@ -645,7 +651,7 @@ plot(
 
 To begin, consider the left and right facets of Figure \ref{fig:hainmueller_subgroup_example_plot}, which shows estimated subgroup AMCEs for three features from the immigration study. In panel ``A'' (left), all features are configured so that the reference category is the one with the largest difference in levels of support between the two subgroups thus distorting the size of differences at all other levels. In panel ``B'' (right), all features are configured so that the reference category is the one with the smallest difference in preferences between the two subgroups.
 
-Panel A gives the impression that there are significant differences in preferences between high and low ethnocentrism respondents toward immigrants from different countries of origin, with different careers, and with different educational attainments because the reference category choice cascades the difference in reference category favorability into AMCEs for all other feature levels. By contrast, Panel B gives the impression that these differences are negligible. The experimental data and analytic approach in the two portrayals is identical; the only difference is the choice of reference category. Given what we have shown about the relationship between differences in conditional AMCEs and differences in conditional marginal means, Panel B is the more truthful visualization \citep{Cairo2016}. The differences between subgroup AMCEs there more accurately convey differences in underlying preferences because the reference categories used in Panel B are the most similar between the two groups.
+Panel A gives the impression that there are significant differences in preferences between high and low ethnocentrism respondents toward immigrants from different countries of origin, with different careers, and with different educational attainments because the reference category choice cascades the difference in reference category favorability into AMCEs for all other feature levels. By contrast, Panel B gives the impression that these differences are negligible. The experimental data and analytic approach in the two portrayals is identical; the only difference is the choice of reference category. Given what we have shown about the relationship between differences in conditional AMCEs and differences in conditional marginal means, Panel B is a more ``truthful'' visualization, which \citet{Cairo2016} uses to mean avoidance of self-deception in the presentation of data, and a more ``functional'' visualization, by which \citeauthor{Cairo2016} means choosing graphics based on how they will be interpreted by the visualization's consumers. The differences between subgroup AMCEs there more accurately convey differences in underlying preferences because the reference categories used in Panel B are the most similar between the two groups.
 
 <<hainmueller_mm_diffs, dependson=c("data_hainmueller_immigration"), fig.height = 5, fig.width=8, fig.cap="Differences in Conditional Marginal Means, by Ethnocentrism, for Three Features From Hainmueller et al.'s (2014) Immigration Experiment", message=FALSE>>=
 mm_by_ethnocentrism <- cj(
@@ -745,6 +751,17 @@ The popularity of conjoint analyses in recent years highlights the power of the 
 
 
 \appendix
+\setcounter{page}{1}
+
+\noindent {\large ``Measuring Subgroup Preferences in Conjoint Experiments: Supplemental Information''}
+
+\vspace{0.5em}
+
+\noindent Thomas J. Leeper, Sara B. Hobolt, and James Tilley\\
+\noindent 2019-05-24
+
+\renewcommand{\contentsname}{}
+\vspace{-2em}
 \tableofcontents
 
 
@@ -926,7 +943,8 @@ c <- plot(
  aes(shape = PartyID) + 
  scale_shape_manual("PartyID", limits = c("Democrat", "Republican"), values = c(15,17)) +
  theme(
-   legend.position = "none",
+   legend.position = c(0.1,0.8),
+   legend.title=element_blank(),
    panel.border = element_blank(),
    axis.line.x = element_blank(),
    axis.line.y = element_blank()
@@ -947,7 +965,8 @@ d <- plot(
  aes(shape = PartyID) + 
  scale_shape_manual("PartyID", limits = c("Democrat", "Republican"), values = c(15,17)) +
  theme(
-  legend.position = "none",
+  legend.position = c(0.1,0.8),
+  legend.title=element_blank(),
   panel.border = element_blank(),
   axis.line.x = element_blank(),
   axis.line.y = element_blank()
@@ -1541,7 +1560,6 @@ plot(cj(bechtel, choice_cj ~ ctries_cj + emissions_cj, weights = ~ weight, id = 
 @
 
 \clearpage
-
 
 \section*{}
 
